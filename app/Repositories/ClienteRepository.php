@@ -32,7 +32,6 @@ class ClienteRepository
             $this->cliente->telefono = $model->telefono;
             $this->cliente->email = $model->email;
             $this->cliente->persona = $model->persona;
-            $this->cliente->id_emp = $model->id_emp;
 
             if(!empty($model->id_cliente)) {
                 $this->cliente->exists = true;

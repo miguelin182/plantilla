@@ -47,10 +47,13 @@ class CreditController extends Controller
             'title' => 'Buscar cliente'
         ]);
     }
+
+    /**
+     * Guarda un cliente nuevo a la base de datos
+     */
     public function postGcliente(){
         $model = new Cliente();
 
-        $empresa = Auth::getCurrentUser();
         if (isset($_POST['id_cliente'])){
             $model->id_cliente = $_POST['id_cliente'];
         }
@@ -60,7 +63,6 @@ class CreditController extends Controller
         $model->celular = $_POST['celular'];
         $model->persona = $_POST['persona'];
         $model->email = $_POST['email'];
-        $model->id_emp = $empresa->id_emp;
         $rh = $this->clienteRepo->guardar($model);
 
 

@@ -100,6 +100,9 @@ class UsuarioRepository {
         return $rh;
     }
 
+    /**
+     * Se modifico para que pudiera guardar el id de la empresa a la que pertenece el usuario
+     */
     public function autenticar(string $correo, string $password) : ResponseHelper {
         $rh = new ResponseHelper();
 
