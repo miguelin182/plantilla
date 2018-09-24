@@ -60,7 +60,7 @@ class CreditController extends Controller
         $model->celular = $_POST['celular'];
         $model->persona = $_POST['persona'];
         $model->email = $_POST['email'];
-        $model->id_emp = $empresa->id;
+        $model->id_emp = $empresa->id_emp;
         $rh = $this->clienteRepo->guardar($model);
 
 

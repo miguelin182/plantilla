@@ -113,7 +113,8 @@ class UsuarioRepository {
                     'id' => $row->id,
                     'nombre' => $row->nombre,
                     'apellido' => $row->apellido,
-                    'rol_id' => $row->rol_id
+                    'rol_id' => $row->rol_id,
+                    'id_emp' => $row->id_emp
                 ]);
 
                 $rh->setResponse(true);
