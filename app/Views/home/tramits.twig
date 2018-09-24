@@ -1,0 +1,50 @@
+{% extends "partials/template.twig" %}
+{% block content %}
+    <!-- ##### Breadcrumb Area Start ##### -->
+    <div class="breadcrumb-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <img src="{{ 'images/core-img/breadcrumb-line.png' |public }}" alt="">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{{ 'home/index' |url }}"><i class="fa fa-home"></i> Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Tramites</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ##### Breadcrumb Area End ##### -->
+
+    <div class="typography-content-area section-padding-0-100">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-10">
+                    <div class="section-heading">
+                        <h2>Tramites</h2>
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                    <label class="label col-form-label-lg">INE</label>
+                    <input type="file" name="" id="" class="form-control">
+                </div>
+                <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                    <label class="label col-form-label-lg">Contrato de prestamo</label>
+                    <input type="file" name="" id="" class="form-control">
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                    <button class="btn btn-primary">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

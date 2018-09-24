@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Plantilla | {{title}}</title>
+    <!--<link href="{{ 'bower_components/bootstrap/dist/css/bootstrap.min.css'|public }}" rel="stylesheet" />
+    <link href="{{ 'bower_components/bootstrap/dist/css/bootstrap-theme.min.css'|public }}" rel="stylesheet" />
+    <link href="{{ 'bower_components/font-awesome/css/font-awesome.min.css'|public }}" rel="stylesheet" />
+    <link href="{{ 'bower_components/EasyAutocomplete/dist/easy-autocomplete.min.css'|public }}" rel="stylesheet" /> -->
+    <link href="{{ 'css/toastr.css'|public }}" rel="stylesheet" />
+    <link href="{{ 'css/style.css'|public }}" rel="stylesheet" />
+</head>
+<body>
+
+<div class="container">
+    <div class="col-xs-12">
+        <!-- ##### Preloader ##### -->
+        <div class="preloader d-flex align-items-center justify-content-center">
+            <div class="circle-preloader">
+                <img src="{{ 'images/core-img/logo.png' |public }}" style="width: 200px; height: 75px;" alt="">
+                <div class="app-preloader">
+                    <span></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ##### Header Area Start ##### -->
+        <header class="header-area">
+
+            <!-- Top Header Area -->
+            <div class="top-header">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="top-header-content d-flex align-items-center justify-content-between" style="padding-right: 20px;">
+
+                                <!-- Social Button -->
+                                <div class="top-social-info">
+                                    <a href="https://www.facebook.com"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                                    <a href="https://www.twitter.com"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                                    <a href="#" data-toggle="modal" data-target="#Mapa"><i class="fa fa-map-marker" aria-hidden="true"></i></a>
+                                </div>
+                                <div class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Iniciar sesión<span class="caret"></span></a>
+                                    <ul class="dropdown-menu dropdown-lr animated slideInDown" role="menu" style=" height: 200px;">
+                                        <div class="col-lg-12 col-md-12 col-xs-12 text-center" style="width: 300px; height: 160px;">
+                                                        <form role="form" method="post" action="{{ 'home/signin' |url }}">
+                                                            <h5>Inicio de sesión</h5>
+                                                            <div class="form-group">
+                                                                <input class="form-control" placeholder="E-mail" name="email" type="email" id="email" required/>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <input class="form-control" placeholder="Contraseña" name="password" type="password" id="password" required/>
+                                                            </div>
+                                                            <button type="submit" class="btn btn-xs btn-success" style="width: 100%" id="btnLogin">Ingresar</button>
+                                                        </form>
+                                        </div>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Logo Area -->
+            <div class="logo-area text-center">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <!-- Nav brand -->
+                            <a href="{{ 'home/index' |url }}" class="nav-brand"><img src="{{ 'images/core-img/logo.png' |public }}" style="width: 200px; height: 75px;" alt=""></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navbar Area -->
+            <div class="app-main-menu">
+                <div class="classy-nav-container breakpoint-off" style="width: 100%; box-shadow: 0 5px 50px 15px rgba(0, 0, 0, 0.2);">
+                    <div class="container" style="position: relative; z-index: -1;">
+                        <!-- Menu -->
+                        <nav class="classy-navbar" id="appNav">
+
+                            <!-- Nav brand -->
+                            <a href="{{ 'home/index' |url }}" class="nav-brand"><img src="{{ 'images/core-img/logo.png' |public }}"  style="width: 200px; height: 75px;" alt=""></a>
+
+                            <!-- Navbar Toggler -->
+                            <div class="classy-navbar-toggler">
+                                <span class="navbarToggler"><span></span><span></span><span></span></span>
+                            </div>
+
+                            <!-- Menu -->
+                            <div class="classy-menu">
+
+                                <!-- close btn -->
+                                <div class="classycloseIcon">
+                                    <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                                </div>
+
+                                <!-- Nav Start -->
+                                <div class="classynav" style="width: 140%">
+                                    <ul>
+                                        <li><a href="{{ 'home/index' |url }}">Inicio</a></li>
+                                        <li><a href="#">Consultoria</a>
+                                            <ul class="dropdown">
+                                                <li><a href="{{ 'home/newclient' |url }}">Cliente nuevo</a></li>
+                                                <li><a href="{{ 'home/searchclient' |url }}">Busqueda cliente</a></li>
+                                                <li><a href="{{ 'home/tramits' |url }}">Tramites</a></li>
+                                                <li><a href="{{ 'home/consults' |url }}">Consultas</a></li>
+                                                <li><a href="{{ 'home/linked' |url }}">Bases enlazadas</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="#">Clientes</a></li>
+                                        <li><a href="#">Registro</a></li>
+                                        <li><a href="#">Base de creditos</a></li>
+                                        <li><a href="#">Enlace empresas</a></li>
+
+                                    </ul>
+
+                                </div>
+                                <!-- Nav End -->
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- ##### Header Area End ##### -->
+
+        {% block content %}{% endblock %}
+
+        <div class="modal fade" id="Mapa" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Nuestra ubicación</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1036.3944698505854!2d-110.96517565730845!3d29.105634778086!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x86ce84279136fc75%3A0x80723f37dc69d61e!2sAv.+Jos%C3%A9+Mar%C3%ADa+Mendoza+150%2C+Balderrama%2C+83180+Hermosillo%2C+Son.!5e0!3m2!1ses-419!2smx!4v1536881265055" width="475" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ##### Footer Area Start ##### -->
+        <footer class="footer-area">
+            <div class="container">
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="copywrite-text">
+                            <p>
+                                Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+</div>
+
+ <script src="{{ 'bower_components/jquery/dist/jquery.min.js'|public }}"></script>
+<!--<script src="{{ 'bower_components/bootstrap/dist/js/bootstrap.min.js'|public }}"></script>
+<script src="{{ 'bower_components/riot/riot.min.js'|public }}"></script>
+<script src="{{ 'bower_components/riot/riot+compiler.min.js'|public }}"></script>
+<script src="{{ 'bower_components/jquery.form.min/index.js'|public }}"></script>-->
+<script src="{{ 'bower_components/moment/min/moment.min.js'|public }}"></script>
+<!-- jQuery-2.2.4 js -->
+<script src="{{ 'js/jquery/jquery-2.2.4.min.js' |public }}"></script>
+<!-- Popper js -->
+<script src="{{ 'js/bootstrap/popper.min.js' |public }}"></script>
+<!-- Bootstrap js -->
+<script src="{{ 'js/bootstrap/bootstrap.min.js' |public }}"></script>
+<!-- All Plugins js -->
+<script src="{{ 'js/plugins/plugins.js' |public }}"></script>
+<script src="{{ 'bower_components/EasyAutocomplete/dist/jquery.easy-autocomplete.min.js'|public }}"></script>
+<script src="{{ 'js/jquery.form.js'|public }}"></script>
+<script src="{{ 'js/toastr.js'|public }}"></script>
+<script src="{{ 'js/ini.js'|public }}"></script>
+<script src="{{ 'js/formulas.js'|public }}"></script>
+<script>
+    $("#btnLogin").click(function (e) {
+        e.preventDefault();
+        $.ajax({
+            type: "POST",
+            url: "{{ 'home/signin'|url }}",
+            dataType: 'json',
+            data: {
+                email: $("#email").val(),
+                password:$("#password").val()
+            },
+            success: function(json) {
+                if (json.response === false){
+                    toastr.error(json.message);
+                } else {
+                    window.location.replace("{{ 'credit'|url }}");
+                }
+            }
+        });
+    });
+</script>
+
+{% block scripts %}{% endblock %}
+
+<script>
+    function redirect(url) { url = url || ''; window.location.href = base_url(url);}
+    function base_url(url) { url = url || ''; return '{{''|url}}' + url;}
+</script>
+</body>
+</html>

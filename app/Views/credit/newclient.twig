@@ -1,0 +1,172 @@
+{% extends "partials/templatein.twig" %}
+{% block content %}
+        <!-- ##### Breadcrumb Area Start ##### -->
+        <div class="breadcrumb-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <img src="{{ 'images/core-img/breadcrumb-line.png' |public }}" alt="">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="{{ 'credit/index' |url }}"><i class="fa fa-home"></i> Inicio</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Cliente nuevo</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ##### Breadcrumb Area End ##### -->
+
+        <div class="typography-content-area section-padding-0-100">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-12 col-lg-10">
+                        <div class="section-heading">
+                            <h2>Cliente nuevo</h2>
+                            <p>Registrese</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row justify-content-center">
+                    <div class="col-12 col-lg-10">
+                            <div class="row">
+                                <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 text-center">
+                                    <h2>Empresa</h2>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-4 col-xs-4 col-md-4 col-lg-4 col-xl-4">
+                                    <label>Nombre empresa</label>
+                                    <input type="text" name="razon" id="razon" placeholder="Razon social completa" class="form-control" required>
+                                    <span class="label label-danger" data-key="razon"></span>
+                                </div>
+                                <div class="col-sm-4 col-xs-4 col-md-4 col-lg-4 col-xl-4">
+                                    <label>Dirección</label>
+                                    <input type="text" name="direccion" id="direccion" placeholder="Calle #, Col. x , Ciudad, Estado" class="form-control" required>
+                                    <span class="label label-danger" data-key="direccion"></span>
+                                </div>
+                                <div class="col-sm-4 col-xs-4 col-md-4 col-lg-4 col-xl-4">
+                                    <label>Correo electrónico</label>
+                                    <input type="email" name="email_empresa" id="email_empresa" placeholder="ejemplo@tudominio.com" class="form-control" required>
+                                    <span class="label label-danger" data-key="email_empresa"></span>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-sm-4 col-xs-4 col-md-4 col-lg-4 col-xl-4">
+                                    <label>RFC</label>
+                                    <input type="text" name="rfc" id="rfc" placeholder="" class="form-control" required>
+                                    <span class="label label-danger" data-key="rfc"></span>
+                                </div>
+                                <div class="col-sm-4 col-xs-4 col-md-4 col-lg-4 col-xl-4">
+                                    <label>Telefono</label>
+                                    <input type="text" name="telefono" id="telefono" placeholder="" class="form-control" required>
+                                    <span class="label label-danger" data-key="telefono"></span>
+                                </div>
+                                <div class="col-sm-4 col-xs-4 col-md-4 col-lg-4 col-xl-4">
+                                    <label>Giro</label>
+                                    <select id="giro" name="giro" class="form-control" required>
+                                        <option hidden selected>Seleccione una opción</option>
+                                        <option value="Comercial">Comercial</option>
+                                        <option value="Servicios">Servicios</option>
+                                        <option value="Industrial">Industrial</option>
+                                    </select>
+                                    <span class="label label-danger" data-key="giro"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
+                                    <label>Sector</label>
+                                    <select id="sector" name="sector" class="form-control" required>
+                                        <option hidden selected>Seleccione una opción</option>
+                                        <option value="Constructora">Constructora</option>
+                                        <option value="Comercio">Comercio</option>
+                                        <option value="Electrica">Electrica</option>
+                                        <option value="Tecnología">Tecnología</option>
+                                        <option value="Otro">Otro</option>
+                                    </select>
+                                    <span class="label label-danger" data-key="sector"></span>
+                                </div>
+                                <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4" id="div_sector">
+                                    <label>Especifique:</label>
+                                    <input type="text" name="otro_sector" id="otro_sector" class="form-control" required>
+                                    <span class="label label-danger" data-key="otro_sector"></span>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 text-center">
+                                    <h2>Representante legal</h2>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-4 col-xs-4 col-md-4 col-lg-4 col-xl-4">
+                                    <label>Nombre Completo</label>
+                                    <input type="text" name="representante" id="representante" placeholder="Nombre(s) | Apellido Paterno | Apellido Materno" class="form-control">
+                                    <span class="label label-danger" data-key="representante"></span>
+                                </div>
+                                <div class="col-sm-4 col-xs-4 col-md-4 col-lg-4 col-xl-4">
+                                    <label>Correo electrónico</label>
+                                    <input type="email" name="email_representante" id="email_representante" placeholder="ejemplo@tudominio.com" class="form-control">
+                                    <span class="label label-danger" data-key="email_representante"></span>
+                                </div>
+                                <div class="col-sm-4 col-xs-4 col-md-4 col-lg-4 col-xl-4">
+                                    <label>Celular</label>
+                                    <input type="text" name="celular" id="celular" placeholder="(xxx) xxxx xxxxx" class="form-control">
+                                    <span class="label label-danger" data-key="celular"></span>
+                                </div>
+                            </div>
+                            <br>
+                                <div class="pull-right">
+                                    <button type="reset" class="btn btn-default">Cancelar</button>
+                                    <button class="btn btn-primary" id="btnGuardar" data-ajax="true">Registrarse</button>
+                                </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+{% endblock %}
+{% block scripts %}
+    <script>
+        $("#div_sector").hide();
+        $("#sector").change(function () {
+           if($("#sector").val() ==='Otro'){
+               $("#div_sector").show();
+           } else {
+               $("#div_sector").hide();
+               $("#otro_sector").val('');
+            }
+        });
+
+        $("#btnGuardar").click(function (e) {
+            e.preventDefault();
+            $.ajax({
+                type: "POST",
+                url: "{{ 'home/gempresa'|url }}",
+                dataType: 'json',
+                data: {
+                    razon_social: $("#razon").val(),
+                    direccion: $("#direccion").val(),
+                    email_empresa: $("#email_empresa").val(),
+                    rfc: $("#rfc").val(),
+                    telefono: $("#telefono").val(),
+                    representante: $("#representante").val(),
+                    email_representante: $("#email_representante").val(),
+                    celular: $("#celular").val(),
+                    giro: $("#giro").val(),
+                    sector: $("#sector").val(),
+                    otro_sector: $("#otro_sector").val()
+                },
+                success: function(json) {
+                    if (json.response === false){
+                        toastr.error('Un error inesperado a ocurrido.');
+                    } else {
+                        toastr.success('Guardado con exito.');
+                    }
+                }
+            });
+        });
+    </script>
+{% endblock %}

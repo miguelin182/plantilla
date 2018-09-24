@@ -1,0 +1,99 @@
+{% extends "partials/templatein.twig" %}
+{% block content %}
+    <!-- ##### Breadcrumb Area Start ##### -->
+    <div class="breadcrumb-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <img src="{{ 'images/core-img/breadcrumb-line.png' |public }}" alt="">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{{ 'credit/index' |url }}"><i class="fa fa-home"></i> Inicio</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Buscar cliente</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ##### Breadcrumb Area End ##### -->
+
+    <div class="typography-content-area section-padding-0-100">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    <a href="{{ 'credit/clientef' |url }}" class="btn btn-success" target="_blank"><i class="fa fa-plus"></i> Cliente nuevo</a>
+                </div>
+                <div class="col-12 col-lg-10">
+                    <div class="section-heading">
+                        <h2>Buscar cliente</h2>
+
+                        <div class="input-group">
+
+                            <!-- /btn-group -->
+                            <input class="form-control" type="text" id="txtbusqueda" placeholder="Nombre completo">
+                            <div class="input-group-btn">
+                                <button type="button" class="btn btn-primary" id="btnSearch" style="border-bottom-left-radius: 0; border-top-left-radius: 0;">Buscar</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 text-center" id="tbClientes"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODALES -->
+
+    <div class="modal fade" id="clienteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Cliente nuevo</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block scripts %}
+    <script>
+        $("#btnSearch").click(function (e) {
+            e.preventDefault();
+            $.ajax({
+                type: "POST",
+                url: "{{ 'home/buscarc'|url }}",
+                dataType: 'json',
+                data: {
+                    busqueda: $("#txtbusqueda").val()
+                },
+                success: function(json) {
+                    if (json.length === 0){
+                        $("#tbClientes").html('<h5>No se encontraron resultados</h5>');
+                     } else {
+                        $html = '<table class="table table-hover">'+
+                            '<thead>' +
+                            '<th>Nombre</th>'+
+                            '<th>RFC</th>' +
+                            '<th>Telefono</th>' +
+                            '<th>Celular</th>' +
+                            '</thead>' +
+                            '<tbody>';
+                        for (i=0; i < json.length; i++){
+                            $html += '<tr>'+
+                                    '<td>'+json[i].nombre+'</td>'+
+                                    '<td>'+json[i].rfc+'</td>'+
+                                    '<td>'+json[i].telefono+'</td>'+
+                                    '<td>'+json[i].celular+'</td>'+
+                                    '</tr>';
+                        }
+                        $html += '</tbody></table>';
+                        $("#tbClientes").html($html);
+                    }
+                }
+            });
+        });
+    </script>
+{% endblock %}

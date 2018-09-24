@@ -1,0 +1,239 @@
+{% extends "partials/layout.twig" %}
+{% block content %}
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 text-center">
+            <h3>Cliente nuevo</h3>
+        </div>
+    </div>
+    <form>
+    <div class="row" id="divNombre">
+        <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
+            <div class="form-group">
+                <label class="col-form-label">Nombre(s):</label>
+                <input type="text" class="form-control" name="txtnombre" id="txtnombre">
+                <span class="label label-warning" id="lblnombre"></span>
+            </div>
+        </div>
+        <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
+            <div class="form-group">
+                <label class="col-form-label">Apellido paterno:</label>
+                <input type="text" class="form-control" name="txtap" id="txtap">
+                <span class="label label-danger" id="lblap"></span>
+            </div>
+        </div>
+        <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
+            <div class="form-group">
+                <label class="col-form-label">Apellido materno:</label>
+                <input type="text" class="form-control" name="txtam" id="txtam">
+                <span class="label label-danger" id="lblam"></span>
+            </div>
+        </div>
+    </div>
+        <div class="row"  id="divRazon">
+            <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                <div class="form-group">
+                    <label class="col-form-label">Razon social:</label>
+                    <input type="text" class="form-control" name="txtrazon" id="txtrazon">
+                    <span class="label label-danger" id="lblrazon"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
+                <label class="radio-inline"><input type="radio" id="radPersona" name="radPersona" value="Moral" checked>Persona Moral</label>
+                <label class="radio-inline"><input type="radio" id="radPersona" name="radPersona" value="Física">Persona física</label>
+            </div>
+        </div>
+
+        <div class="row">
+        <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
+            <div class="form-group">
+                <label class="col-form-label">RFC:</label>
+                <input type="text" class="form-control" name="txtrfc" id="txtrfc">
+                <span class="label label-danger" id="lblrfc"></span>
+            </div>
+        </div>
+        <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
+            <div class="form-group">
+                <label class="col-form-label">Telefono casa/oficina:</label>
+                <input type="text" class="form-control" name="txttelefono" id="txttelefono">
+                <span class="label label-danger" id="lbltelefono"></span>
+            </div>
+        </div>
+        <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
+            <div class="form-group">
+                <label class="col-form-label">Telefono celular:</label>
+                <input type="text" class="form-control" name="txtcelular" id="txtcelular">
+                <span class="label label-danger" id="lblcelular"></span>
+            </div>
+        </div>
+    </div>
+        <div class="row">
+            <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
+                <div class="form-group">
+                    <label class="col-form-label">Correo Electrónico</label>
+                    <input type="email" name="txtemail" id="txtemail" class="form-control">
+                    <span class="label label-danger" id="lblEmail"></span>
+                </div>
+            </div>
+        </div>
+    <div class="row pull-right" id="divGuardar">
+        <button type="reset" class="btn btn-secondary" data-dismiss="modal">limpiar</button>
+        <button id="btnGuardar" class="btn btn-primary">Guardar</button>
+    </div>
+        <br><br>
+        <hr>
+        <div id="divNext">
+            <div class="row">
+                <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
+                    <label class="col-form-label">Monto del credito en insumos o material</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
+                    <div class="form-group">
+                        <div class="radio">
+                            <label><input type="radio" name="monto" id="monto" value="1 a 5">1 a 5</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="monto" id="monto" value="5 a 20">5 a 20</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="monto" id="monto" value="20 a 50">20 a 50</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="monto" id="monto" value="mas de 50">mas de 50</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="monto" id="monto" value="0" checked>Ninguna de las anteriores</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
+                    <div class="form-group">
+                        <label class="col-form-label">Monto Credito <br>(Especificar en caso de no querer usar rangos)</label>
+                        <input type="number" class="form-control" name="numMonto" id="numMonto">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                    <div class="form-group pull-right">
+                        <label class="checkbox-inline"><input type="checkbox" value="1" name="chkCredito">Credito Activo</label>
+                    </div>
+                </div>
+            </div>
+        <hr>
+            <div class="row">
+                <div class="col-sm-2 col-md-2 col-lg-2 col-xl-2">
+                    <label class="col-form-label">Fecha de pago</label>
+                </div>
+                <div class="col-sm-2 col-md-2 col-lg-2 col-xl-2">
+                    <div class="radio">
+                        <label><input type="radio" name="radFecha" id="radFecha" value="15 días">15 días</label>
+                    </div>
+                    <div class="radio">
+                        <label><input type="radio" name="radFecha" id="radFecha" value="un mes">Un mes</label>
+                    </div>
+                    <div class="radio">
+                        <label><input type="radio" name="radFecha" id="radFecha" value="anual">Anual</label>
+                    </div>
+                    <div class="radio">
+                        <label><input type="radio" name="radFecha" id="radFecha" value="0" checked>Ninguna de las anteriores</label>
+                    </div>
+                </div>
+                <div class="col-sm-2 col-md-2 col-lg-2 col-xl-2 text-center">
+                    <input type="number" id="numFecha" name="numFecha" class="form-control">
+                    <label class="col-form-label"># de dias</label>
+                </div>
+            </div>
+            <div class="row pull-right">
+                <button id="btnGuardar" class="btn btn-primary">Guardar</button>
+            </div>
+        </div>
+    </form>
+{% endblock %}
+{% block scripts %}
+<script>
+    $("#divNombre").hide();
+    //$("#divNext").hide();
+    $("input[type=radio][name=radPersona]").change(function () {
+       if ($("input[name=radPersona]:checked").val() == 'Moral'){
+           $("#divRazon").show();
+           $("#divNombre").hide();
+           $("#txtnombre").val('');
+           $("#txtap").val('');
+           $("#txtam").val('');
+       } else {
+           $("#divRazon").hide();
+           $("#divNombre").show();
+           $("#txtrazon").val('');
+       }
+    });
+    $("#btnGuardar").click(function (e) {
+        e.preventDefault();
+        var Name;
+        if ($("input[name=radPersona]:checked").val() == 'Moral') {
+            Name = $("#txtrazon").val();
+        } else {
+            Name = $("#txtnombre").val()+ ' ' + $("#txtap").val() + ' ' + $("#txtam").val();
+        }
+        $("#divNext").show();
+        $("#divGuardar").hide();
+        $.ajax({
+            type: "POST",
+            url: "{{ 'credit/gcliente'|url }}",
+            dataType: 'json',
+            data: {
+                nombre: Name,
+                rfc: $('#txtrfc').val(),
+                telefono: $("#txttelefono").val(),
+                celular: $('#txtcelular').val(),
+                persona: $("input[name=radPersona]:checked").val(),
+                email: $('#txtemail').val()
+            },
+            success: function(json) {
+                if (json.response === false){
+                    toastr.error("Un error inesperado a ocurrido.");
+                } else {
+                    toastr.success('Guardado con exito.');
+                }
+            }
+        });
+
+        $("#btnguardar2").click(function (e) {
+           e.preventDefault();
+           var monto = '';
+           var fecha = '';
+            if (parseInt($("#numMonto").val()) != 0 || !isNaN(parseInt($("#numMonto").val()))){
+                monto = $("#numMonto").val();
+            } else if($("input[name=radPersona]:checked").val() != "0"){
+                monto = $("input[name=radPersona]:checked").val();
+            }
+            if(parseInt($("#numFecha").val()) != 0 || !isNaN(parseInt($("#numFecha").val()))){
+                fecha = $("#numFecha").val();
+            } else if ($("input[name=radFecha]:checked").val() != "0"){
+                fecha = $("input[name=radFecha]:checked").val();
+            }
+            $.ajax({
+                type: "POST",
+                url: "{{ 'credit/gcliente'|url }}",
+                dataType: 'json',
+                data: {
+                    id_cli: ,
+                    monto: monto,
+                    activo: ,
+                    plazo: fecha
+                },
+                success: function(json) {
+                    if (json.response === false){
+                        toastr.error("Un error inesperado a ocurrido.");
+                    } else {
+                        toastr.success('Guardado con exito.');
+                    }
+                }
+            });
+        });
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<title>Plantilla | {{title}}</title>
+		<link href="{{ 'css/toastr.css'|public }}" rel="stylesheet" />
+		<link href="{{ 'css/style.css'|public }}" rel="stylesheet" />
+	</head>
+    <body>
+
+		<div class="container" style="padding-top: 10%;	">
+
+				{% block content %}{% endblock %}
+
+				<footer class="text-center footer-area">
+						<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+							Desarrollador por  {{ "now"|date("Y") }}
+						</div>
+				</footer>
+		</div>
+
+		<script src="{{ 'bower_components/jquery/dist/jquery.min.js'|public }}"></script>
+		<script src="{{ 'bower_components/moment/min/moment.min.js'|public }}"></script>
+		<!-- jQuery-2.2.4 js -->
+		<script src="{{ 'js/jquery/jquery-2.2.4.min.js' |public }}"></script>
+		<!-- Popper js -->
+		<script src="{{ 'js/bootstrap/popper.min.js' |public }}"></script>
+		<!-- Bootstrap js -->
+		<script src="{{ 'js/bootstrap/bootstrap.min.js' |public }}"></script>
+		<!-- All Plugins js -->
+		<script src="{{ 'js/plugins/plugins.js' |public }}"></script>
+		<script src="{{ 'bower_components/EasyAutocomplete/dist/jquery.easy-autocomplete.min.js'|public }}"></script>
+		<script src="{{ 'js/jquery.form.js'|public }}"></script>
+		<script src="{{ 'js/toastr.js'|public }}"></script>
+		<script src="{{ 'js/ini.js'|public }}"></script>
+		<script src="{{ 'js/formulas.js'|public }}"></script>
+		<script src="{{ 'js/plugins/plugins.js'|public }}"></script>
+
+		{% block scripts %}{% endblock %}
+
+		<script>
+			function redirect(url) { url = url || ''; window.location.href = base_url(url);}
+			function base_url(url) { url = url || ''; return '{{''|url}}' + url;}
+		</script>
+	</body>
+</html>
