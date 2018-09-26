@@ -10,10 +10,10 @@ class ResponseHelper {
 	public $filter      = null;
     public $validations = [];
 	
-	public function setResponse($response, $m = '') {
+	public function setResponse($response, $m = '', $result = 0) {
 		$this->response = $response;
 		$this->message = $m;
-
+        $this->result = $result;
 		if(!$response && $m = '') {
             $this->response = 'Ocurrio un error inesperado';
         }

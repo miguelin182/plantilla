@@ -13,6 +13,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Credit extends Model
 {
-    protected $table = 'credit';
+    protected $table = 'relsyscliemp';
 
 }
