@@ -406,7 +406,7 @@ img {
     padding: 0 10px;
     font-size: 14px; }
 .header-area .top-header .top-header-content .top-social-info a:hover {
-    color: #004085; }
+    color: #1abc9c; }
 @media only screen and (max-width: 767px) {
     .header-area .top-header .top-header-content .top-social-info a {
         padding: 0 5px; } }
@@ -462,7 +462,7 @@ img {
     .header-area .app-main-menu .classynav ul li a {
         padding: 0 15px; } }
 .header-area .app-main-menu .classynav ul li a:hover, .header-area .app-main-menu .classynav ul li a:focus {
-    color: #004085   ; }
+    color: #1abc9c   ; }
 .header-area .app-main-menu .classynav ul li ul li a {
     padding: 0 20px;
     letter-spacing: 0; }
