@@ -11,7 +11,9 @@ namespace App\Controllers;
 
 use App\Helpers\ResponseHelper;
 use App\Models\Cliente;
+use App\Models\Credit;
 use App\Repositories\ClienteRepository;
+use App\Repositories\CreditRepository;
 use App\Validations\ClientValidation;
 use Core\Auth;
 use Core\Controller;
@@ -19,10 +21,12 @@ use Core\Controller;
 class CreditController extends Controller
 {
     private $clienteRepo;
+    private $creditRepo;
     public function __construct()
     {
         parent::__construct();
         $this->clienteRepo = new ClienteRepository();
+        $this->creditRepo = new CreditRepository();
     }
 
     public  function  getIndex(){
@@ -71,6 +75,34 @@ class CreditController extends Controller
         );
 
     }
+
+    public function postGcredito(){
+        $model = new Credit();
+
+        $empresa = Auth::getCurrentUser();
+        if (isset($_POST['id_rel'])){
+            $model->id_rel = $_POST['id_rel'];
+        }
+        $model->id_cli = $_POST['id_cli'];
+        $model->id_emp = $empresa->id_emp;
+        $model->monto = $_POST['monto'];
+        $model->activo = $_POST['activo'];
+        $model->plazo = $_POST['plazo'];
+        $rh = $this->creditRepo->guardar($model);
+
+
+        print_r(
+            json_encode($rh)
+        );
+
+    }
+
+    public function postBuscarcrf() {
+        print_r(
+            json_encode($this->clienteRepo->buscarRfc($_POST['rfc']))
+        );
+    }
+
     public function postBuscarc(){
         $rh = new  ResponseHelper();
         $busqueda = $_POST['busqueda'];

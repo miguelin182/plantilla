@@ -38,7 +38,7 @@ class ClienteRepository
             }
 
             $this->cliente->save();
-            $rh->setResponse(true);
+            $rh->setResponse(true,'',$this->cliente->id);
         } catch (\Exception $e){
             Log::error(ClienteRepository::class, $e->getMessage());
             $rh->setResponse(false);
@@ -56,7 +56,7 @@ class ClienteRepository
         return $lista;
     }
 
-    public function listarR($rfc): Collection {
+    public function buscarRfc($rfc): Collection {
         $lista = [];
         try{
             $lista = $this->cliente->where('rfc','=',$rfc)->get();

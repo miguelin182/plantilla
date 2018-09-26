@@ -5,7 +5,7 @@
             <h3>Cliente nuevo</h3>
         </div>
     </div>
-    <form>
+    <form id="frmCredito">
     <div class="row" id="divNombre">
         <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
             <div class="form-group">
@@ -49,7 +49,7 @@
         <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
             <div class="form-group">
                 <label class="col-form-label">RFC:</label>
-                <input type="text" class="form-control" name="txtrfc" id="txtrfc">
+                <input type="text" class="form-control" name="txtrfc" id="txtrfc" required>
                 <span class="label label-danger" id="lblrfc"></span>
             </div>
         </div>
@@ -63,7 +63,7 @@
         <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
             <div class="form-group">
                 <label class="col-form-label">Telefono celular:</label>
-                <input type="text" class="form-control" name="txtcelular" id="txtcelular">
+                <input type="text" class="form-control" name="txtcelular" id="txtcelular" required>
                 <span class="label label-danger" id="lblcelular"></span>
             </div>
         </div>
@@ -72,14 +72,14 @@
             <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
                 <div class="form-group">
                     <label class="col-form-label">Correo Electrónico</label>
-                    <input type="email" name="txtemail" id="txtemail" class="form-control">
+                    <input type="email" name="txtemail" id="txtemail" class="form-control" required>
                     <span class="label label-danger" id="lblEmail"></span>
                 </div>
             </div>
         </div>
     <div class="row pull-right" id="divGuardar">
         <button type="reset" class="btn btn-secondary" data-dismiss="modal">limpiar</button>
-        <button id="btnGuardar" class="btn btn-primary">Guardar</button>
+        <input type="submit" id="btnGuardar" class="btn btn-primary" value="Guardar">
     </div>
         <br><br>
         <hr>
@@ -119,7 +119,7 @@
             <div class="row">
                 <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
                     <div class="form-group pull-right">
-                        <label class="checkbox-inline"><input type="checkbox" value="1" name="chkCredito">Credito Activo</label>
+                        <label class="checkbox-inline"><input type="checkbox" value="1" name="chkCredito" id="chkCredito">Credito Activo</label>
                     </div>
                 </div>
             </div>
@@ -148,15 +148,17 @@
                 </div>
             </div>
             <div class="row pull-right">
-                <button id="btnGuardar" class="btn btn-primary">Guardar</button>
+                <button id="btnGuardar2" class="btn btn-primary">Guardar</button>
             </div>
         </div>
     </form>
 {% endblock %}
 {% block scripts %}
+
 <script>
+    var id = 0;
     $("#divNombre").hide();
-    //$("#divNext").hide();
+    $("#divNext").hide();
     $("input[type=radio][name=radPersona]").change(function () {
        if ($("input[name=radPersona]:checked").val() == 'Moral'){
            $("#divRazon").show();
@@ -178,33 +180,98 @@
         } else {
             Name = $("#txtnombre").val()+ ' ' + $("#txtap").val() + ' ' + $("#txtam").val();
         }
-        $("#divNext").show();
-        $("#divGuardar").hide();
-        $.ajax({
-            type: "POST",
-            url: "{{ 'credit/gcliente'|url }}",
-            dataType: 'json',
-            data: {
-                nombre: Name,
-                rfc: $('#txtrfc').val(),
-                telefono: $("#txttelefono").val(),
-                celular: $('#txtcelular').val(),
-                persona: $("input[name=radPersona]:checked").val(),
-                email: $('#txtemail').val()
+        $("#frmCredito").validate({
+                rules: {
+                    txtrfc: "required",
+                    txtcelular: "required",
+                    txtemail: {
+                        required: true,
+                        email: true
+                    }
+                },
+            messages: {
+                    txtrfc: {
+                        required: "El campo rfc es requerido."
+                    },
+                    txtcelular: {
+                        required: "El campo celular es requerido."
+                    },
+                    txtemail: {
+                        required: "El campo correo electrónico es requerido",
+                        email: "Debe ingresar un correo electrónico valido."
+                    }
             },
-            success: function(json) {
-                if (json.response === false){
-                    toastr.error("Un error inesperado a ocurrido.");
-                } else {
-                    toastr.success('Guardado con exito.');
-                }
+            submitHandler: function () {
+                $.ajax({
+                    type: "POST",
+                    url: "{{ 'credit/buscarcrf'|url }}",
+                    dataType: 'json',
+                    data: {
+                        rfc: $('#txtrfc').val()
+                    },
+                    success: function(json) {
+                        if(json.length > 0 ){
+                            toastr.success('Guardado con exito.');
+                            $("#divNext").show();
+                            $("#divGuardar").hide();
+                            Name = '';
+                            id = json[0].id_cliente;
+                            $('#txtrfc').attr('disabled',true);
+                            $("#txttelefono").attr('disabled',true);
+                            $('#txtcelular').attr('disabled',true);
+                            $("input[name=radPersona]").attr('disabled',true);
+                            $('#txtemail').attr('disabled',true);
+                            $("#txtnombre").attr('disabled',true);
+                            $("#txtap").attr('disabled',true);
+                            $("#txtam").attr('disabled',true);
+                            $("#txtrazon").attr('disabled',true);
+                        } else{
+                            $.ajax({
+                                type: "POST",
+                                url: "{{ 'credit/gcliente'|url }}",
+                                dataType: 'json',
+                                data: {
+                                    nombre: Name,
+                                    rfc: $('#txtrfc').val(),
+                                    telefono: $("#txttelefono").val(),
+                                    celular: $('#txtcelular').val(),
+                                    persona: $("input[name=radPersona]:checked").val(),
+                                    email: $('#txtemail').val()
+                                },
+                                success: function(json) {
+                                    if (json.response === false){
+                                        toastr.error("Un error inesperado a ocurrido.");
+                                    } else {
+                                        toastr.success('Guardado con exito.');
+                                        $("#divNext").show();
+                                        $("#divGuardar").hide();
+                                        Name = '';
+                                        id = json.result;
+                                        $('#txtrfc').attr('disabled',true);
+                                        $("#txttelefono").attr('disabled',true);
+                                        $('#txtcelular').attr('disabled',true);
+                                        $("input[name=radPersona]").attr('disabled',true);
+                                        $('#txtemail').attr('disabled',true);
+                                        $("#txtnombre").attr('disabled',true);
+                                        $("#txtap").attr('disabled',true);
+                                        $("#txtam").attr('disabled',true);
+                                        $("#txtrazon").attr('disabled',true);
+                                    }
+                                }
+                            });
+                        }
+                    }
+                });
             }
         });
 
-        $("#btnguardar2").click(function (e) {
+    });
+
+        $("#btnGuardar2").click(function (e) {
            e.preventDefault();
            var monto = '';
            var fecha = '';
+           var credito = false;
             if (parseInt($("#numMonto").val()) != 0 || !isNaN(parseInt($("#numMonto").val()))){
                 monto = $("#numMonto").val();
             } else if($("input[name=radPersona]:checked").val() != "0"){
@@ -215,14 +282,17 @@
             } else if ($("input[name=radFecha]:checked").val() != "0"){
                 fecha = $("input[name=radFecha]:checked").val();
             }
+            if ($("#chkCredito").is(':checked')){
+                credito = true;
+            }
             $.ajax({
                 type: "POST",
-                url: "{{ 'credit/gcliente'|url }}",
+                url: "{{ 'credit/gcredito'|url }}",
                 dataType: 'json',
                 data: {
-                    id_cli: ,
+                    id_cli: id,
                     monto: monto,
-                    activo: ,
+                    activo: credito,
                     plazo: fecha
                 },
                 success: function(json) {
@@ -234,6 +304,6 @@
                 }
             });
         });
-    });
+
 </script>
 {% endblock %}
