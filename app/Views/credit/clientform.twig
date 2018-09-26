@@ -172,7 +172,79 @@
            $("#txtrazon").val('');
        }
     });
-    $("#btnGuardar").click(function (e) {
+    $("#frmCredito").submit(function (e) {
+       e.preventDefault();
+       if($("input[name=radPersona]:checked").val() == 'Moral' && $("#txtrazon").val() == ""){
+           toastr.warning("Favor de especificar la razon social.");
+       } else{
+           if ($("input[name=radPersona]:checked").val() == 'Física' || $("#txtnombre").val() == "" || $("#txtap").val() == ""  || $("#txtam").val() == "" ){
+               toastr.warning("Favor de especificar el nombre completo.");
+           } else {
+               $.ajax({
+                   type: "POST",
+                   url: "{{ 'credit/buscarcrf'|url }}",
+                   dataType: 'json',
+                   data: {
+                       rfc: $('#txtrfc').val()
+                   },
+                   success: function(json) {
+                       if(json.length > 0 ){
+                           toastr.success('Guardado con exito.');
+                           $("#divNext").show();
+                           $("#divGuardar").hide();
+                           Name = '';
+                           id = json[0].id_cliente;
+                           $('#txtrfc').attr('disabled',true);
+                           $("#txttelefono").attr('disabled',true);
+                           $('#txtcelular').attr('disabled',true);
+                           $("input[name=radPersona]").attr('disabled',true);
+                           $('#txtemail').attr('disabled',true);
+                           $("#txtnombre").attr('disabled',true);
+                           $("#txtap").attr('disabled',true);
+                           $("#txtam").attr('disabled',true);
+                           $("#txtrazon").attr('disabled',true);
+                       } else{
+                           $.ajax({
+                               type: "POST",
+                               url: "{{ 'credit/gcliente'|url }}",
+                               dataType: 'json',
+                               data: {
+                                   nombre: Name,
+                                   rfc: $('#txtrfc').val(),
+                                   telefono: $("#txttelefono").val(),
+                                   celular: $('#txtcelular').val(),
+                                   persona: $("input[name=radPersona]:checked").val(),
+                                   email: $('#txtemail').val()
+                               },
+                               success: function(json) {
+                                   if (json.response === false){
+                                       toastr.error("Un error inesperado a ocurrido.");
+                                   } else {
+                                       toastr.success('Guardado con exito.');
+                                       $("#divNext").show();
+                                       $("#divGuardar").hide();
+                                       Name = '';
+                                       id = json.result;
+                                       $('#txtrfc').attr('disabled',true);
+                                       $("#txttelefono").attr('disabled',true);
+                                       $('#txtcelular').attr('disabled',true);
+                                       $("input[name=radPersona]").attr('disabled',true);
+                                       $('#txtemail').attr('disabled',true);
+                                       $("#txtnombre").attr('disabled',true);
+                                       $("#txtap").attr('disabled',true);
+                                       $("#txtam").attr('disabled',true);
+                                       $("#txtrazon").attr('disabled',true);
+                                   }
+                               }
+                           });
+                       }
+                   }
+               });
+           }
+       }
+    });
+
+    /*$("#btnGuardar").click(function (e) {
         e.preventDefault();
         var Name;
         if ($("input[name=radPersona]:checked").val() == 'Moral') {
@@ -265,7 +337,7 @@
             }
         });
 
-    });
+    });*/
 
         $("#btnGuardar2").click(function (e) {
            e.preventDefault();
