@@ -6,15 +6,15 @@
 		<link href="{{ 'css/style.css'|public }}" rel="stylesheet" />
 		<link href="{{ 'css/AdminLTE.min.css' |public }}" rel="stylesheet">
 	</head>
-    <body>
+    <body class="frm">
 
-		<div class="container" style="padding-top: 10%;	">
+		<div class="container-fluid" style="padding-top: 10%;	">
 
 				{% block content %}{% endblock %}
 
 				<footer class="text-center footer-area">
 						<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-							Desarrollador por  {{ "now"|date("Y") }}
+							{#Desarrollador por  {{ "now"|date("Y") }}#}
 						</div>
 				</footer>
 		</div>

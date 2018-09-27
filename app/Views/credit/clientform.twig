@@ -1,157 +1,186 @@
 {% extends "partials/layout.twig" %}
 {% block content %}
-    <div class="row">
-        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 text-center">
-            <h3>Cliente nuevo</h3>
+    <div class="box">
+        <div class="box-header text-center">
+            <h2>Cliente nuevo</h2>
         </div>
-    </div>
-    <form id="frmCredito">
-    <div class="row" id="divNombre">
-        <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
-            <div class="form-group">
-                <label class="col-form-label">Nombre(s):</label>
-                <input type="text" class="form-control" name="txtnombre" id="txtnombre">
-                <span class="label label-warning" id="lblnombre"></span>
-            </div>
-        </div>
-        <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
-            <div class="form-group">
-                <label class="col-form-label">Apellido paterno:</label>
-                <input type="text" class="form-control" name="txtap" id="txtap">
-                <span class="label label-danger" id="lblap"></span>
-            </div>
-        </div>
-        <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
-            <div class="form-group">
-                <label class="col-form-label">Apellido materno:</label>
-                <input type="text" class="form-control" name="txtam" id="txtam">
-                <span class="label label-danger" id="lblam"></span>
-            </div>
-        </div>
-    </div>
-        <div class="row"  id="divRazon">
-            <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
-                <div class="form-group">
-                    <label class="col-form-label">Razon social:</label>
-                    <input type="text" class="form-control" name="txtrazon" id="txtrazon">
-                    <span class="label label-danger" id="lblrazon"></span>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
-                <label class="radio-inline"><input type="radio" id="radPersona" name="radPersona" value="Moral" checked>Persona Moral</label>
-                <label class="radio-inline"><input type="radio" id="radPersona" name="radPersona" value="Física">Persona física</label>
-            </div>
-        </div>
+        <hr>
+        <div class="box-body">
+            <form id="frmCredito">
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h5>Información general</h5>
+                        <div class="pull-right box-tools">
+                            <button class="btn btn-box-tool" type="button" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <div class="row" id="divNombre">
+                            <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
+                                <div class="form-group">
+                                    <label class="col-form-label">Nombre(s):</label>
+                                    <input type="text" class="form-control" name="txtnombre" id="txtnombre">
+                                    <span class="label label-warning" id="lblnombre"></span>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
+                                <div class="form-group">
+                                    <label class="col-form-label">Apellido paterno:</label>
+                                    <input type="text" class="form-control" name="txtap" id="txtap">
+                                    <span class="label label-danger" id="lblap"></span>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
+                                <div class="form-group">
+                                    <label class="col-form-label">Apellido materno:</label>
+                                    <input type="text" class="form-control" name="txtam" id="txtam">
+                                    <span class="label label-danger" id="lblam"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row"  id="divRazon">
+                            <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                                <div class="form-group">
+                                    <label class="col-form-label">Razon social:</label>
+                                    <input type="text" class="form-control" name="txtrazon" id="txtrazon">
+                                    <span class="label label-danger" id="lblrazon"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
+                                <label class="radio-inline"><input type="radio" id="radPersona" name="radPersona" value="Moral" checked>Persona Moral</label>
+                                <label class="radio-inline"><input type="radio" id="radPersona" name="radPersona" value="Física">Persona física</label>
+                            </div>
+                        </div>
 
-        <div class="row">
-        <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
-            <div class="form-group">
-                <label class="col-form-label">RFC:</label>
-                <input type="text" class="form-control" name="txtrfc" id="txtrfc" required>
-                <span class="label label-danger" id="lblrfc"></span>
-            </div>
-        </div>
-        <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
-            <div class="form-group">
-                <label class="col-form-label">Telefono casa/oficina:</label>
-                <input type="text" class="form-control" name="txttelefono" id="txttelefono">
-                <span class="label label-danger" id="lbltelefono"></span>
-            </div>
-        </div>
-        <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
-            <div class="form-group">
-                <label class="col-form-label">Telefono celular:</label>
-                <input type="text" class="form-control" name="txtcelular" id="txtcelular" required>
-                <span class="label label-danger" id="lblcelular"></span>
-            </div>
+                        <div class="row">
+                            <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
+                                <div class="form-group">
+                                    <label class="col-form-label">RFC:</label>
+                                    <input type="text" class="form-control" name="txtrfc" id="txtrfc" required>
+                                    <span class="label label-danger" id="lblrfc"></span>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
+                                <div class="form-group">
+                                    <label class="col-form-label">Telefono casa/oficina:</label>
+                                    <input type="text" class="form-control" name="txttelefono" id="txttelefono">
+                                    <span class="label label-danger" id="lbltelefono"></span>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
+                                <div class="form-group">
+                                    <label class="col-form-label">Telefono celular:</label>
+                                    <input type="text" class="form-control" name="txtcelular" id="txtcelular" required>
+                                    <span class="label label-danger" id="lblcelular"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
+                                <div class="form-group">
+                                    <label class="col-form-label">Correo Electrónico</label>
+                                    <input type="email" name="txtemail" id="txtemail" class="form-control" required>
+                                    <span class="label label-danger" id="lblEmail"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row pull-right" id="divGuardar">
+                            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                <button type="reset" class="btn btn-secondary" data-dismiss="modal">limpiar</button>
+                                <input type="submit" id="btnGuardar" class="btn btn-primary" value="Guardar">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="divNext">
+                    <div class="box box-primary">
+                        <div class="box-header with-border">
+                            <h5>Monto en insumos o material</h5>
+                            <div class="pull-right box-tools">
+                                <button class="btn btn-box-tool" type="button" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                            </div>
+                        </div>
+                        <div class="box-body">
+                            <div class="row">
+                                <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
+                                    <div class="form-group">
+                                        <div class="radio">
+                                            <label><input type="radio" name="monto" id="monto" value="1 a 5">1 a 5</label>
+                                        </div>
+                                        <div class="radio">
+                                            <label><input type="radio" name="monto" id="monto" value="5 a 20">5 a 20</label>
+                                        </div>
+                                        <div class="radio">
+                                            <label><input type="radio" name="monto" id="monto" value="20 a 50">20 a 50</label>
+                                        </div>
+                                        <div class="radio">
+                                            <label><input type="radio" name="monto" id="monto" value="mas de 50">mas de 50</label>
+                                        </div>
+                                        <div class="radio">
+                                            <label><input type="radio" name="monto" id="monto" value="0" checked>Ninguna de las anteriores</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
+                                    <div class="form-group">
+                                        <label class="col-form-label">Monto Credito <br>(Especificar en caso de no querer usar rangos)</label>
+                                        <input type="number" class="form-control" name="numMonto" id="numMonto">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box box-primary">
+                        <div class="box-header with-border">
+                            <h5>Plazo de pago</h5>
+                            <div class="pull-right box-tools">
+                                <button class="btn btn-box-tool" type="button" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                            </div>
+                        </div>
+                        <div class="box-body">
+                            <div class="row">
+                                <div class="col-sm-2 col-md-2 col-lg-2 col-xl-2">
+                                    <div class="radio">
+                                        <label><input type="radio" name="radFecha" id="radFecha" value="15 días">15 días</label>
+                                    </div>
+                                    <div class="radio">
+                                        <label><input type="radio" name="radFecha" id="radFecha" value="un mes">Un mes</label>
+                                    </div>
+                                    <div class="radio">
+                                        <label><input type="radio" name="radFecha" id="radFecha" value="anual">Anual</label>
+                                    </div>
+                                    <div class="radio">
+                                        <label><input type="radio" name="radFecha" id="radFecha" value="0" checked>Ninguna de las anteriores</label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2 col-md-2 col-lg-2 col-xl-2 text-center">
+                                    <input type="number" id="numFecha" name="numFecha" class="form-control">
+                                    <label class="col-form-label"># de dias</label>
+                                </div>
+                            </div>
+                            <div class="row pull-right">
+                                <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                    <button id="btnGuardar2" class="btn btn-primary">Guardar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
-        <div class="row">
-            <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
-                <div class="form-group">
-                    <label class="col-form-label">Correo Electrónico</label>
-                    <input type="email" name="txtemail" id="txtemail" class="form-control" required>
-                    <span class="label label-danger" id="lblEmail"></span>
-                </div>
-            </div>
-        </div>
-    <div class="row pull-right" id="divGuardar">
-        <button type="reset" class="btn btn-secondary" data-dismiss="modal">limpiar</button>
-        <input type="submit" id="btnGuardar" class="btn btn-primary" value="Guardar">
-    </div>
-        <br><br>
-        <hr>
-        <div id="divNext">
-            <div class="row">
-                <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
-                    <label class="col-form-label">Monto del credito en insumos o material</label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
-                    <div class="form-group">
-                        <div class="radio">
-                            <label><input type="radio" name="monto" id="monto" value="1 a 5">1 a 5</label>
-                        </div>
-                        <div class="radio">
-                            <label><input type="radio" name="monto" id="monto" value="5 a 20">5 a 20</label>
-                        </div>
-                        <div class="radio">
-                            <label><input type="radio" name="monto" id="monto" value="20 a 50">20 a 50</label>
-                        </div>
-                        <div class="radio">
-                            <label><input type="radio" name="monto" id="monto" value="mas de 50">mas de 50</label>
-                        </div>
-                        <div class="radio">
-                            <label><input type="radio" name="monto" id="monto" value="0" checked>Ninguna de las anteriores</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
-                    <div class="form-group">
-                        <label class="col-form-label">Monto Credito <br>(Especificar en caso de no querer usar rangos)</label>
-                        <input type="number" class="form-control" name="numMonto" id="numMonto">
-                    </div>
-                </div>
-            </div>
-        <hr>
-            <div class="row">
-                <div class="col-sm-2 col-md-2 col-lg-2 col-xl-2">
-                    <label class="col-form-label">Fecha de pago</label>
-                </div>
-                <div class="col-sm-2 col-md-2 col-lg-2 col-xl-2">
-                    <div class="radio">
-                        <label><input type="radio" name="radFecha" id="radFecha" value="15 días">15 días</label>
-                    </div>
-                    <div class="radio">
-                        <label><input type="radio" name="radFecha" id="radFecha" value="un mes">Un mes</label>
-                    </div>
-                    <div class="radio">
-                        <label><input type="radio" name="radFecha" id="radFecha" value="anual">Anual</label>
-                    </div>
-                    <div class="radio">
-                        <label><input type="radio" name="radFecha" id="radFecha" value="0" checked>Ninguna de las anteriores</label>
-                    </div>
-                </div>
-                <div class="col-sm-2 col-md-2 col-lg-2 col-xl-2 text-center">
-                    <input type="number" id="numFecha" name="numFecha" class="form-control">
-                    <label class="col-form-label"># de dias</label>
-                </div>
-            </div>
-            <div class="row pull-right">
-                <button id="btnGuardar2" class="btn btn-primary">Guardar</button>
-            </div>
-        </div>
-    </form>
+
+
+
 {% endblock %}
 {% block scripts %}
 
 <script>
     var id = 0;
     $("#divNombre").hide();
-    $("#divNext").hide();
+    //$("#divNext").hide();
     $("input[type=radio][name=radPersona]").change(function () {
        if ($("input[name=radPersona]:checked").val() == 'Moral'){
            $("#divRazon").show();

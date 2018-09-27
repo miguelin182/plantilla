@@ -11,6 +11,10 @@
     padding: 0;
 }
 
+body.frm {
+    background-color: #ecf0f5;
+}
+
 
 
 span.lblValidacion{
