@@ -116,13 +116,6 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                    <div class="form-group pull-right">
-                        <label class="checkbox-inline"><input type="checkbox" value="1" name="chkCredito" id="chkCredito">Credito Activo</label>
-                    </div>
-                </div>
-            </div>
         <hr>
             <div class="row">
                 <div class="col-sm-2 col-md-2 col-lg-2 col-xl-2">
@@ -189,7 +182,6 @@
                    },
                    success: function(json) {
                        if(json.length > 0 ){
-                           toastr.success('Guardado con exito.');
                            $("#divNext").show();
                            $("#divGuardar").hide();
                            Name = '';
@@ -203,6 +195,24 @@
                            $("#txtap").attr('disabled',true);
                            $("#txtam").attr('disabled',true);
                            $("#txtrazon").attr('disabled',true);
+                           $.ajax({
+                               type: "POST",
+                               url: "{{ 'credit/gcredito'|url }}",
+                               dataType: 'json',
+                               data: {
+                                   id_cli: id,
+                                   monto: null,
+                                   activo: false,
+                                   plazo: null
+                               },
+                               success: function(json) {
+                                   if (json.response === false){
+                                       toastr.error("Un error inesperado a ocurrido.");
+                                   } else {
+                                       toastr.success('Guardado con exito.');
+                                   }
+                               }
+                           });
                        } else{
                            $.ajax({
                                type: "POST",
@@ -220,7 +230,6 @@
                                    if (json.response === false){
                                        toastr.error("Un error inesperado a ocurrido.");
                                    } else {
-                                       toastr.success('Guardado con exito.');
                                        $("#divNext").show();
                                        $("#divGuardar").hide();
                                        Name = '';
@@ -234,6 +243,24 @@
                                        $("#txtap").attr('disabled',true);
                                        $("#txtam").attr('disabled',true);
                                        $("#txtrazon").attr('disabled',true);
+                                       $.ajax({
+                                           type: "POST",
+                                           url: "{{ 'credit/gcredito'|url }}",
+                                           dataType: 'json',
+                                           data: {
+                                               id_cli: id,
+                                               monto: null,
+                                               activo: false,
+                                               plazo: null
+                                           },
+                                           success: function(json) {
+                                               if (json.response === false){
+                                                   toastr.error("Un error inesperado a ocurrido.");
+                                               } else {
+                                                   toastr.success('Guardado con exito.');
+                                               }
+                                           }
+                                       });
                                    }
                                }
                            });
@@ -243,101 +270,6 @@
            }
        }
     });
-
-    /*$("#btnGuardar").click(function (e) {
-        e.preventDefault();
-        var Name;
-        if ($("input[name=radPersona]:checked").val() == 'Moral') {
-            Name = $("#txtrazon").val();
-        } else {
-            Name = $("#txtnombre").val()+ ' ' + $("#txtap").val() + ' ' + $("#txtam").val();
-        }
-        $("#frmCredito").validate({
-                rules: {
-                    txtrfc: "required",
-                    txtcelular: "required",
-                    txtemail: {
-                        required: true,
-                        email: true
-                    }
-                },
-            messages: {
-                    txtrfc: {
-                        required: "El campo rfc es requerido."
-                    },
-                    txtcelular: {
-                        required: "El campo celular es requerido."
-                    },
-                    txtemail: {
-                        required: "El campo correo electrónico es requerido",
-                        email: "Debe ingresar un correo electrónico valido."
-                    }
-            },
-            submitHandler: function () {
-                $.ajax({
-                    type: "POST",
-                    url: "{{ 'credit/buscarcrf'|url }}",
-                    dataType: 'json',
-                    data: {
-                        rfc: $('#txtrfc').val()
-                    },
-                    success: function(json) {
-                        if(json.length > 0 ){
-                            toastr.success('Guardado con exito.');
-                            $("#divNext").show();
-                            $("#divGuardar").hide();
-                            Name = '';
-                            id = json[0].id_cliente;
-                            $('#txtrfc').attr('disabled',true);
-                            $("#txttelefono").attr('disabled',true);
-                            $('#txtcelular').attr('disabled',true);
-                            $("input[name=radPersona]").attr('disabled',true);
-                            $('#txtemail').attr('disabled',true);
-                            $("#txtnombre").attr('disabled',true);
-                            $("#txtap").attr('disabled',true);
-                            $("#txtam").attr('disabled',true);
-                            $("#txtrazon").attr('disabled',true);
-                        } else{
-                            $.ajax({
-                                type: "POST",
-                                url: "{{ 'credit/gcliente'|url }}",
-                                dataType: 'json',
-                                data: {
-                                    nombre: Name,
-                                    rfc: $('#txtrfc').val(),
-                                    telefono: $("#txttelefono").val(),
-                                    celular: $('#txtcelular').val(),
-                                    persona: $("input[name=radPersona]:checked").val(),
-                                    email: $('#txtemail').val()
-                                },
-                                success: function(json) {
-                                    if (json.response === false){
-                                        toastr.error("Un error inesperado a ocurrido.");
-                                    } else {
-                                        toastr.success('Guardado con exito.');
-                                        $("#divNext").show();
-                                        $("#divGuardar").hide();
-                                        Name = '';
-                                        id = json.result;
-                                        $('#txtrfc').attr('disabled',true);
-                                        $("#txttelefono").attr('disabled',true);
-                                        $('#txtcelular').attr('disabled',true);
-                                        $("input[name=radPersona]").attr('disabled',true);
-                                        $('#txtemail').attr('disabled',true);
-                                        $("#txtnombre").attr('disabled',true);
-                                        $("#txtap").attr('disabled',true);
-                                        $("#txtam").attr('disabled',true);
-                                        $("#txtrazon").attr('disabled',true);
-                                    }
-                                }
-                            });
-                        }
-                    }
-                });
-            }
-        });
-
-    });*/
 
         $("#btnGuardar2").click(function (e) {
            e.preventDefault();
@@ -354,7 +286,7 @@
             } else if ($("input[name=radFecha]:checked").val() != "0"){
                 fecha = $("input[name=radFecha]:checked").val();
             }
-            if ($("#chkCredito").is(':checked')){
+            if ($("input[name=radFecha]:checked").val() == "0" && $("#numFecha").val() == 0){
                 credito = true;
             }
             $.ajax({
