@@ -214,7 +214,7 @@ img {
       width: 100%;
       height: 2px;
       border-radius: 6px;
-      background: #232323; }
+      background: #858585; }
       .classycloseIcon .cross-wrap span.top {
         top: 12px;
         left: 0;
@@ -403,7 +403,7 @@ img {
 .breakpoint-on .classy-navbar-toggler {
   display: block; }
 .breakpoint-on .classy-navbar .classy-menu {
-  background-color: #ffffff;
+  background-color: #404040;
   position: fixed;
   top: 0;
   left: -310px;
@@ -453,7 +453,9 @@ img {
 .breakpoint-on .classynav ul li .megamenu {
   display: none; }
 .breakpoint-on .classynav {
-  padding-top: 70px; }
+  padding-top: 70px;
+  background-color: #404040;
+  }
   .breakpoint-on .classynav ul li .megamenu {
     position: relative;
     width: 100%;
@@ -468,7 +470,7 @@ img {
       border-right: none;
       border-bottom: 1px solid #f2f4f8; }
 .breakpoint-on .classynav > ul > li > a {
-  background-color: #f2f4f8;
+  background-color: #404040;
   border-bottom: 1px solid rgba(255, 255, 255, 0.5); }
 .breakpoint-on .classynav ul li ul.dropdown li ul li {
   margin-left: 15px; }
