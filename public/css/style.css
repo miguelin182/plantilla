@@ -240,7 +240,7 @@ img {
     width: 80px;
     height: 100%;
     position: absolute;
-    background-color: #e59f80;
+    background-color: #1b6d85;
     top: 0;
     left: 0;
     border-radius: 2px;
@@ -299,7 +299,7 @@ img {
 
 /* :: 3.7.0 ScrollUp */
 #scrollUp {
-    background-color: #e59f80;
+    background-color: #1b6d85;
     border-radius: 0;
     bottom: 0;
     box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.3);
@@ -774,7 +774,7 @@ img {
     line-height: 1.5;
     margin-bottom: 0; }
 .featured-post-area .carousel-indicators li .post-title h5:hover {
-    color: #e59f80; }
+    color: #1b6d85; }
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
     .featured-post-area .carousel-indicators li .post-title h5 {
         font-size: 16px; } }
@@ -935,7 +935,7 @@ img {
         font-size: 12px; } }
 .footer-area .copywrite-text p a {
     font-size: 14px;
-    color: #a6a6a6;
+    color: #0f0f0f;
     font-weight: 400; }
 .footer-area .copywrite-text p a:hover, .footer-area .copywrite-text p a:focus {
     color: #1b6d85; }
