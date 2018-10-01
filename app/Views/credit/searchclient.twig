@@ -34,7 +34,23 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 text-center" id="tbClientes"></div>
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 text-center" id="tbClientes">
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>RFC</th>
+                                <th>Telefono</th>
+                                <th>Celular</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td colspan="4"><h5>Favor de ingresar tu busqueda</h5></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -67,27 +83,47 @@
                     busqueda: $("#txtbusqueda").val()
                 },
                 success: function(json) {
+                    var html;
                     if (json.length === 0){
-                        $("#tbClientes").html('<h5>No se encontraron resultados</h5>');
-                     } else {
-                        $html = '<table class="table table-hover">'+
+
+                         html = '<table class="table table-hover">'+
                             '<thead>' +
+                            '<tr>'+
                             '<th>Nombre</th>'+
                             '<th>RFC</th>' +
                             '<th>Telefono</th>' +
                             '<th>Celular</th>' +
+                            '</tr>'+
+                        '</thead>' +
+                        '<tbody>'+
+                                '<tr>'+
+                                '<td colspan="4">'+
+                                '<h5>No se encontraron resultados</h5>'+
+                                '</td>'+
+                                '<tr>'+
+                        '</tbody>';
+                        $("#tbClientes").html(html);
+                     } else {
+                         html = '<table class="table table-hover">'+
+                            '<thead>' +
+                                '<tr>'+
+                            '<th>Nombre</th>'+
+                            '<th>RFC</th>' +
+                            '<th>Telefono</th>' +
+                            '<th>Celular</th>' +
+                                '</tr>'+
                             '</thead>' +
                             '<tbody>';
                         for (i=0; i < json.length; i++){
-                            $html += '<tr>'+
+                            html += '<tr>'+
                                     '<td>'+json[i].nombre+'</td>'+
                                     '<td>'+json[i].rfc+'</td>'+
                                     '<td>'+json[i].telefono+'</td>'+
                                     '<td>'+json[i].celular+'</td>'+
                                     '</tr>';
                         }
-                        $html += '</tbody></table>';
-                        $("#tbClientes").html($html);
+                        html += '</tbody></table>';
+                        $("#tbClientes").html(html);
                     }
                 }
             });
