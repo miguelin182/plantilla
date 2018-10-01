@@ -5,16 +5,20 @@ use App\Helpers\ResponseHelper;
 use App\Helpers\UrlHelper;
 use App\Models\Cliente;
 use App\Models\Empresa;
+use App\Models\Usuario;
 use App\Repositories\ClienteRepository;
 use App\Repositories\UsuarioRepository;
 use App\Validations\ClientValidation;
 use Core\{Auth, Controller, Log};
 use App\Repositories\EmpresaRepository;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller {
     private $usuarioRepo;
     private $empresaRepo;
-    private  $clienteRepo;
+    private $clienteRepo;
+    private $authRepo;
+    private $rh;
 
     public function __construct() {
         if(Auth::isLoggedIn()) {
@@ -24,6 +28,7 @@ class HomeController extends Controller {
         $this->usuarioRepo = new UsuarioRepository();
         $this->empresaRepo = new EmpresaRepository();
         $this->clienteRepo = new ClienteRepository();
+        $this->authRepo = new  UsuarioRepository();
     }
 
     public function getIndex() {
@@ -96,30 +101,38 @@ class HomeController extends Controller {
     }
 
     public function postGempresa(){
-        $model = new Empresa();
+            $model = new Empresa();
+            $model2 = new Usuario();
+            if(isset($_POST['id_empresa'])){
+                $model->id_empresa = $_POST['id_empresa'];
+            }
+            $model->razon_social = $_POST['razon_social'];
+            $model->direccion = $_POST['direccion'];
+            $model->email_empresa = $_POST['email_empresa'];
+            $model->rfc = $_POST['rfc'];
+            $model->telefono = $_POST['telefono'];
+            $model->representante = $_POST['representante'];
+            $model->email_representante = $_POST['email_representante'];
+            $model->celular = $_POST['celular'];
+            $model->giro = $_POST['giro'];
 
-        if(isset($_POST['id_empresa'])){
-            $model->id_empresa = $_POST['id_empresa'];
-        }
-        $model->razon_social = $_POST['razon_social'];
-        $model->direccion = $_POST['direccion'];
-        $model->email_empresa = $_POST['email_empresa'];
-        $model->rfc = $_POST['rfc'];
-        $model->telefono = $_POST['telefono'];
-        $model->representante = $_POST['representante'];
-        $model->email_representante = $_POST['email_representante'];
-        $model->celular = $_POST['celular'];
-        $model->giro = $_POST['giro'];
+            if ($_POST['otro_sector'] != ''){
+                $model->sector = $_POST['otro_sector'];
+            } else {
+                $model->sector = $_POST['sector'];
+            }
 
-        if ($_POST['otro_sector'] != ''){
-            $model->sector = $_POST['otro_sector'];
-        } else {
-            $model->sector = $_POST['sector'];
-        }
+            $model2->rol_id = 2;
+            $model2->nombre = $_POST['razon_social'];
+            $model2->email = $_POST['email_empresa'];
+            $model2->password = $_POST['password'];
+//            $model2->id_emp = $this->rh->result;
 
-        $rh = $this->empresaRepo->guardar($model);
+            $this->rh = $this->empresaRepo->guardar($model, $model2);
+
+
         print_r(
-            json_encode($rh)
+            json_encode($this->rh)
         );
     }
 }

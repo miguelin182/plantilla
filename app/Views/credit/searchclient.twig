@@ -21,9 +21,6 @@
     <div class="typography-content-area section-padding-0-100">
         <div class="container">
             <div class="row justify-content-center">
-                <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                    <a href="{{ 'credit/clientef' |url }}" class="btn btn-success" target="_blank"><i class="fa fa-plus"></i> Cliente nuevo</a>
-                </div>
                 <div class="col-12 col-lg-10">
                     <div class="section-heading">
                         <h2>Buscar cliente</h2>
@@ -31,7 +28,7 @@
                         <div class="input-group">
 
                             <!-- /btn-group -->
-                            <input class="form-control" type="text" id="txtbusqueda" placeholder="Nombre completo">
+                            <input class="form-control" type="text" id="txtbusqueda" placeholder="RFC">
                             <div class="input-group-btn">
                                 <button type="button" class="btn btn-primary" id="btnSearch" style="border-bottom-left-radius: 0; border-top-left-radius: 0;">Buscar</button>
                             </div>
@@ -64,7 +61,7 @@
             e.preventDefault();
             $.ajax({
                 type: "POST",
-                url: "{{ 'home/buscarc'|url }}",
+                url: "{{ 'credit/buscarc'|url }}",
                 dataType: 'json',
                 data: {
                     busqueda: $("#txtbusqueda").val()

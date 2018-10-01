@@ -2,7 +2,7 @@
 {% block content %}
     <div class="box">
         <div class="box-header text-center">
-            <h2>Cliente nuevo</h2>
+            <h2>Ingreso de cliente nuevo al sistema y creación de credito</h2>
         </div>
         <hr>
         <div class="box-body">
@@ -169,6 +169,11 @@
                     </div>
                 </div>
             </form>
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 text-center">
+                    <p><strong>*En caso de no indicar un plazo de pago se determinará automaticamente como credito activo.</strong></p>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -180,7 +185,7 @@
 <script>
     var id = 0;
     $("#divNombre").hide();
-    //$("#divNext").hide();
+    $("#divNext").hide();
     $("input[type=radio][name=radPersona]").change(function () {
        if ($("input[name=radPersona]:checked").val() == 'Moral'){
            $("#divRazon").show();

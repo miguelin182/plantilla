@@ -20,8 +20,8 @@ class UsuarioRepository {
             $this->usuario->id = $model->id;
             $this->usuario->rol_id = $model->rol_id;
             $this->usuario->nombre = $model->nombre;
-            $this->usuario->apellido = $model->apellido;
             $this->usuario->email = $model->email;
+            $this->usuario->id_emp = $model->id_emp;
 
             if(!empty($model->id)){
                 /*
@@ -38,7 +38,7 @@ class UsuarioRepository {
             }
 
             $this->usuario->save();
-            $rh->setResponse(true);
+            $rh->setResponse(true, '', $this->usuario->id);
         } catch (Exception $e) {
             Log::error(UsuarioRepository::class, $e->getMessage());
         }
