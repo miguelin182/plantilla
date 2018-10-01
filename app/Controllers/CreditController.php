@@ -10,8 +10,10 @@ namespace App\Controllers;
 
 
 use App\Helpers\ResponseHelper;
+use App\Models\Bitacora;
 use App\Models\Cliente;
 use App\Models\Credit;
+use App\Repositories\BitacoraRepository;
 use App\Repositories\ClienteRepository;
 use App\Repositories\CreditRepository;
 use App\Validations\ClientValidation;
@@ -22,11 +24,13 @@ class CreditController extends Controller
 {
     private $clienteRepo;
     private $creditRepo;
+    private $bitacoraRepo;
     public function __construct()
     {
         parent::__construct();
         $this->clienteRepo = new ClienteRepository();
         $this->creditRepo = new CreditRepository();
+        $this->bitacoraRepo = new BitacoraRepository();
     }
 
     public  function  getIndex(){
@@ -58,6 +62,7 @@ class CreditController extends Controller
     public function postGcliente(){
         $model = new Cliente();
 
+        $empresa = Auth::getCurrentUser();
         if (isset($_POST['id_cliente'])){
             $model->id_cliente = $_POST['id_cliente'];
         }
@@ -69,6 +74,13 @@ class CreditController extends Controller
         $model->email = $_POST['email'];
         $rh = $this->clienteRepo->guardar($model);
 
+        $model2 = new Bitacora();
+
+        $model2->id_emp = $empresa->id_emp;
+        $model2->id_cli = $rh->result;
+        $model2->accion = 1;
+
+        $this->bitacoraRepo->Guardar($model2);
 
         print_r(
             json_encode($rh)
@@ -90,6 +102,13 @@ class CreditController extends Controller
         $model->plazo = $_POST['plazo'];
         $rh = $this->creditRepo->guardar($model);
 
+        $model2 = new Bitacora();
+
+        $model2->id_emp = $empresa->id_emp;
+        $model2->id_cli = $_POST['id_cli'];
+        $model2->accion = 2;
+
+        $this->bitacoraRepo->Guardar($model2);
 
         print_r(
             json_encode($rh)
@@ -108,7 +127,7 @@ class CreditController extends Controller
         $busqueda = $_POST['busqueda'];
 
         print_r(
-            json_encode($this->clienteRepo->listarN($busqueda))
+            json_encode($this->clienteRepo->buscarRfc($busqueda))
         );
     }
     public function postUsuario(){

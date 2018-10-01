@@ -9,7 +9,7 @@
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{ 'credit/index' |url }}"><i class="fa fa-home"></i> Inicio</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Cliente nuevo</li>
+                                <li class="breadcrumb-item active" aria-current="page">Empresa nueva</li>
                             </ol>
                         </nav>
                     </div>
@@ -23,8 +23,8 @@
                 <div class="row justify-content-center">
                     <div class="col-12 col-lg-10">
                         <div class="section-heading">
-                            <h2>Cliente nuevo</h2>
-                            <p>Registrese</p>
+                            <h2>Empresa nueva</h2>
+                            <p>Registro de empresas nuevas al sistema</p>
                         </div>
                     </div>
                 </div>
@@ -36,6 +36,7 @@
                                     <h2>Empresa</h2>
                                 </div>
                             </div>
+                        <form id="frmEmpresa">
                             <div class="row">
                                 <div class="col-sm-4 col-xs-4 col-md-4 col-lg-4 col-xl-4">
                                     <label>Nombre empresa</label>
@@ -104,25 +105,49 @@
                             <div class="row">
                                 <div class="col-sm-4 col-xs-4 col-md-4 col-lg-4 col-xl-4">
                                     <label>Nombre Completo</label>
-                                    <input type="text" name="representante" id="representante" placeholder="Nombre(s) | Apellido Paterno | Apellido Materno" class="form-control">
+                                    <input type="text" name="representante" id="representante" placeholder="Nombre(s) | Apellido Paterno | Apellido Materno" class="form-control" required>
                                     <span class="label label-danger" data-key="representante"></span>
                                 </div>
                                 <div class="col-sm-4 col-xs-4 col-md-4 col-lg-4 col-xl-4">
                                     <label>Correo electrónico</label>
-                                    <input type="email" name="email_representante" id="email_representante" placeholder="ejemplo@tudominio.com" class="form-control">
+                                    <input type="email" name="email_representante" id="email_representante" placeholder="ejemplo@tudominio.com" class="form-control" required>
                                     <span class="label label-danger" data-key="email_representante"></span>
                                 </div>
                                 <div class="col-sm-4 col-xs-4 col-md-4 col-lg-4 col-xl-4">
                                     <label>Celular</label>
-                                    <input type="text" name="celular" id="celular" placeholder="(xxx) xxxx xxxxx" class="form-control">
+                                    <input type="text" name="celular" id="celular" placeholder="(xxx) xxxx xxxxx" class="form-control" required>
                                     <span class="label label-danger" data-key="celular"></span>
                                 </div>
                             </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 text-center">
+                                <h2>Cuenta de usuario</h2>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4 col-xs-4 col-md-4 col-lg-4 col-xl-4">
+                                <label>Correo electrónico</label>
+                                <input type="email" name="email_log" id="email_log" placeholder="ejemplo@tudominio.com" class="form-control" required>
+                                <span class="label label-danger" data-key="email_log"></span>
+                            </div>
+                            <div class="col-sm-4 col-xs-4 col-md-4 col-lg-4 col-xl-4">
+                                <label>Contraseña</label>
+                                <input type="password" name="password" id="password"  class="form-control" required>
+                                <span class="label label-danger" data-key="password"></span>
+                            </div>
+                            <div class="col-sm-4 col-xs-4 col-md-4 col-lg-4 col-xl-4">
+                                <label>Repetir contraseña</label>
+                                <input type="password" name="passwordr" id="passwordr" class="form-control" required>
+                                <span class="label label-danger" data-key="passwordr"></span>
+                            </div>
+                        </div>
                             <br>
                                 <div class="pull-right">
                                     <button type="reset" class="btn btn-default">Cancelar</button>
-                                    <button class="btn btn-primary" id="btnGuardar" data-ajax="true">Registrarse</button>
+                                    <button class="btn btn-primary" type="submit">Registrarse</button>
                                 </div>
+                        </form>
                     </div>
                     </div>
                 </div>
@@ -140,33 +165,36 @@
             }
         });
 
-        $("#btnGuardar").click(function (e) {
+        $("#frmEmpresa").submit(function (e) {
             e.preventDefault();
-            $.ajax({
-                type: "POST",
-                url: "{{ 'home/gempresa'|url }}",
-                dataType: 'json',
-                data: {
-                    razon_social: $("#razon").val(),
-                    direccion: $("#direccion").val(),
-                    email_empresa: $("#email_empresa").val(),
-                    rfc: $("#rfc").val(),
-                    telefono: $("#telefono").val(),
-                    representante: $("#representante").val(),
-                    email_representante: $("#email_representante").val(),
-                    celular: $("#celular").val(),
-                    giro: $("#giro").val(),
-                    sector: $("#sector").val(),
-                    otro_sector: $("#otro_sector").val()
-                },
-                success: function(json) {
-                    if (json.response === false){
-                        toastr.error('Un error inesperado a ocurrido.');
-                    } else {
-                        toastr.success('Guardado con exito.');
+            if ($("#password".val() == $("#passwordr").val())){
+                $.ajax({
+                    type: "POST",
+                    url: "{{ 'home/gempresa'|url }}",
+                    dataType: 'json',
+                    data: {
+                        razon_social: $("#razon").val(),
+                        direccion: $("#direccion").val(),
+                        email_empresa: $("#email_empresa").val(),
+                        rfc: $("#rfc").val(),
+                        telefono: $("#telefono").val(),
+                        representante: $("#representante").val(),
+                        email_representante: $("#email_representante").val(),
+                        celular: $("#celular").val(),
+                        giro: $("#giro").val(),
+                        sector: $("#sector").val(),
+                        otro_sector: $("#otro_sector").val(),
+                        password: $("#password").val()
+                    },
+                    success: function(json) {
+                        if (json.response === false){
+                            toastr.error('Un error inesperado a ocurrido.');
+                        } else {
+                            toastr.success('Guardado con exito.');
+                        }
                     }
-                }
-            });
+                });
+            }
         });
     </script>
 {% endblock %}
