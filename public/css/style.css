@@ -971,7 +971,7 @@ img {
     position: relative;
     z-index: 1; }
 .single-blog-post .post-thumbnail {
-    position: relative;
+    position: running();
     z-index: 1;
     -webkit-box-flex: 0;
     -ms-flex: 0 0 50%;
