@@ -1,0 +1,165 @@
+{% extends "partials/templatein.twig" %}
+{% block content %}
+    <!-- ##### Breadcrumb Area Start ##### -->
+    <div class="breadcrumb-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <img src="{{ 'images/core-img/breadcrumb-line.png' |public }}" alt="">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{{ 'credit/index' |url }}"><i class="fa fa-home"></i> Inicio</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Mis clientes</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ##### Breadcrumb Area End ##### -->
+
+    <div class="typography-content-area section-padding-0-100">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-10">
+                    <div class="section-heading">
+                        <h2>Buscar cliente</h2>
+
+                        <div class="input-group">
+
+                            <!-- /btn-group -->
+                            <input class="form-control" type="text" id="txtbusqueda" placeholder="Nombre(s) | Apellido paterno | Apellido materno">
+                            <div class="input-group-btn">
+                                <button type="button" class="btn btn-primary" id="btnSearch" style="border-bottom-left-radius: 0; border-top-left-radius: 0;">Buscar</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 text-center" id="tbClientes">
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>RFC</th>
+                                <th>Telefono</th>
+                                <th>Celular</th>
+                                <th>Acción</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td colspan="5"><h5>Favor de ingresar tu busqueda</h5></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODALES -->
+
+    <div class="modal fade" id="clienteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Nombre Cliente</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="modalBody">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <ul style="list-style: none;">
+                                <li>Monto: <span id="spnMonto"></span></li>
+                                <li>Plazo: <span id="spnPlazo"></span></li>
+                                <li>Creado el: <span id="spnFecha"></span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>www
+{% endblock %}
+{% block scripts %}
+    <script>
+        $(document).on('click','#btnDetalle', function () {
+            $("#clienteModal").modal('toggle');
+            $("#spnFecha").html($(this).data('fecha'));
+            /*$.ajax({
+                type: "POST",
+                url: "{{ 'credit/buscarcli'|url }}",
+                dataType: 'json',
+                data: {
+                    id: $(this).data('id')
+                },
+                success: function(json) {
+                    console.log(json);
+                    if (json.length === 0){
+                    } else {
+                    }
+                }
+            });*/
+        });
+        $("#btnSearch").click(function (e) {
+            e.preventDefault();
+            $.ajax({
+                type: "POST",
+                url: "{{ 'credit/buscarenombre'|url }}",
+                dataType: 'json',
+                data: {
+                    nombre: $("#txtbusqueda").val()
+                },
+                success: function(json) {
+                    var html;
+                    if (json.length === 0){
+
+                        html = '<table class="table table-hover">'+
+                            '<thead>' +
+                            '<tr>'+
+                            '<th>Nombre</th>'+
+                            '<th>RFC</th>' +
+                            '<th>Telefono</th>' +
+                            '<th>Celular</th>' +
+                            '<th>Acción</th>' +
+                            '</tr>'+
+                            '</thead>' +
+                            '<tbody>'+
+                            '<tr>'+
+                            '<td colspan="4">'+
+                            '<h5>No se encontraron resultados</h5>'+
+                            '</td>'+
+                            '<tr>'+
+                            '</tbody>';
+                        $("#tbClientes").html(html);
+                    } else {
+                        html = '<table class="table table-hover">'+
+                            '<thead>' +
+                            '<tr>'+
+                            '<th>Nombre</th>'+
+                            '<th>RFC</th>' +
+                            '<th>Telefono</th>' +
+                            '<th>Celular</th>' +
+                            '<th>Acción</th>' +
+                            '</tr>'+
+                            '</thead>' +
+                            '<tbody>';
+                        for (i=0; i < json.length; i++){
+                            html += '<tr>'+
+                                '<td>'+json[i].nombre+'</td>'+
+                                '<td>'+json[i].rfc+'</td>'+
+                                '<td>'+json[i].telefono+'</td>'+
+                                '<td>'+json[i].celular+'</td>'+
+                                '<td><button data-id="'+json[i].id_cliente+'" data-fecha="'+json[i].created_at+'" class="btn btn-primary" id="btnDetalle">Detalles</button></td>'+
+                                '</tr>';
+                        }
+                        html += '</tbody></table>';
+                        $("#tbClientes").html(html);
+                    }
+                }
+            });
+        });
+    </script>
+{% endblock %}

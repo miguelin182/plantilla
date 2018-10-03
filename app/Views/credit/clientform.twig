@@ -142,13 +142,13 @@
                             <div class="row">
                                 <div class="col-sm-2 col-md-2 col-lg-2 col-xl-2">
                                     <div class="radio">
-                                        <label><input type="radio" name="radFecha" id="radFecha" value="15 días">15 días</label>
+                                        <label><input type="radio" name="radFecha" id="radFecha" value="15">15 días</label>
                                     </div>
                                     <div class="radio">
-                                        <label><input type="radio" name="radFecha" id="radFecha" value="un mes">Un mes</label>
+                                        <label><input type="radio" name="radFecha" id="radFecha" value="30">Un mes</label>
                                     </div>
                                     <div class="radio">
-                                        <label><input type="radio" name="radFecha" id="radFecha" value="anual">Anual</label>
+                                        <label><input type="radio" name="radFecha" id="radFecha" value="365">Anual</label>
                                     </div>
                                     <div class="radio">
                                         <label><input type="radio" name="radFecha" id="radFecha" value="0" checked>Ninguna de las anteriores</label>
@@ -307,7 +307,7 @@
         $("#btnGuardar2").click(function (e) {
            e.preventDefault();
            var monto = '';
-           var fecha = '';
+           var fecha = 0;
            var credito = false;
             if (parseInt($("#numMonto").val()) != 0 || !isNaN(parseInt($("#numMonto").val()))){
                 monto = $("#numMonto").val();

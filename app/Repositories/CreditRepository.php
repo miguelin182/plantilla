@@ -43,4 +43,16 @@ class CreditRepository
         }
         return $rh;
     }
+
+    public function obtener($id) : Credit {
+        $credit = new Credit();
+
+        try {
+            $credit = $this->credit->find($id);
+        } catch (\Exception $e) {
+            Log::error(UsuarioRepository::class, $e->getMessage());
+        }
+
+        return $credit;
+    }
 }

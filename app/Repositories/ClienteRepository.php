@@ -46,12 +46,26 @@ class ClienteRepository
         return $rh;
     }
 
-    public function listarN($nombre): Collection {
+    public function listarN(string $nombre): Collection {
         $lista = [];
         try{
             $lista = $this->cliente->where('nombre','like',$nombre.'%')->get();
         }catch (\Exception $e){
             Log::error(ClienteRepository::class,$e->getMessage());
+        }
+        return $lista;
+    }
+
+    public function listarE(string $nombre, $id): Collection {
+        $lista = [];
+        try{
+            $lista = $this->cliente->leftJoin('bitacora','clientes.id_cliente','=','bitacora.id_cli')->where([
+                ['clientes.nombre','like',$nombre.'%'],
+                ['bitacora.id_emp','=',$id],
+                ['bitacora.accion','=',1]
+            ])->get();
+        }catch (\Exception $e) {
+            Log::error(ClienteRepository::class, $e->getMessage());
         }
         return $lista;
     }

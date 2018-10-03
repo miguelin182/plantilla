@@ -56,6 +56,12 @@ class CreditController extends Controller
         ]);
     }
 
+    public function getmyclients (){
+        return $this->render('credit/myclients.twig', [
+            'title' => 'Mis clientes'
+        ]);
+    }
+
     /**
      * Guarda un cliente nuevo a la base de datos
      */
@@ -116,9 +122,22 @@ class CreditController extends Controller
 
     }
 
+    public function postBuscarcredit() {
+        print_r(
+            json_encode($this->creditRepo->obtener($_POST['id']))
+        );
+    }
+
     public function postBuscarcrf() {
         print_r(
             json_encode($this->clienteRepo->buscarRfc($_POST['rfc']))
+        );
+    }
+
+    public function postBuscarenombre() {
+        $Usuario = Auth::getCurrentUser();
+        print_r(
+            json_encode($this->clienteRepo->listarE($_POST['nombre'],$Usuario->id_emp))
         );
     }
 
