@@ -68,7 +68,7 @@ img {
   .classy-nav-container.box-skins .classynav > ul > li {
     background-color: #1abc9c; }
     .classy-nav-container.box-skins .classynav > ul > li > a {
-      color: #fff; }
+      color: #FFFFFF; }
 
 .justify-content-between {
   -webkit-box-pack: justify;
@@ -156,8 +156,8 @@ img {
   font-size: 12px;
   color: #000000;
   padding-left: 5px;
-  -webkit-transition-duration: 500ms;
-  transition-duration: 500ms; }
+  -webkit-transition-duration: 50ms;
+  transition-duration: 50ms; }
 
 .classynav ul li ul li.has-down > a::after {
   -webkit-transform: rotate(-90deg);
