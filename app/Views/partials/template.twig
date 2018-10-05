@@ -171,7 +171,7 @@
 
     <div class="footer-left">
 
-        <h3>Company<span>logo</span></h3>
+        <a href="{{ 'home/index' |url }}" class="nav-brand"><img src="{{ 'images/core-img/logo.png' |public }}" style="width: 200px; height: 75px;" alt=""></a>
 
         <p class="footer-links">
             <a href="#">Home</a>
@@ -187,7 +187,7 @@
             <a href="#">Contact</a>
         </p>
 
-        <p class="footer-company-name">Company Name &copy; 2015</p>
+        <p class="footer-company-name">Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved</p>
     </div>
 
     <div class="footer-center">
