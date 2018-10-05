@@ -310,7 +310,7 @@ img {
     right: 50px;
     text-align: center;
     width: 40px;
-    -webkit-transition-duration: 500ms;
+    -webkit-transition-duration: 50ms;
     transition-duration: 50ms; }
 #scrollUp:hover {
     background-color: #191919; }
@@ -941,6 +941,7 @@ img {
     position: relative;
     z-index: 10;
     width: 100%;
+
     padding-bottom: 60px; }
 .breadcrumb-area .breadcrumb {
     margin: 0;
