@@ -35,7 +35,7 @@
                         </div>
                     </div>
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 text-center" id="tbClientes">
-                        <table class="table table-hover">
+                        <table class="table table-hover table-bordered">
                             <thead>
                             <tr>
                                 <th>Nombre</th>
@@ -60,7 +60,7 @@
     <!-- MODALES -->
 
     <div class="modal fade" id="clienteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Nombre Cliente</h5>
@@ -72,36 +72,224 @@
                     <div class="row">
                         <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
                             <ul style="list-style: none;">
-                                <li>Monto: <span id="spnMonto"></span></li>
-                                <li>Plazo: <span id="spnPlazo"></span></li>
                                 <li>Creado el: <span id="spnFecha"></span></li>
                             </ul>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 text-center">
+                            <label><strong>Creditos otorgados</strong></label>
+                            <table class="table table-hover table-bordered">
+                                <thead>
+                                    <th>Fecha de creación</th>
+                                    <th>Monto</th>
+                                    <th>Plazo</th>
+                                    <th>Estado actual</th>
+                                </thead>
+                                <tbody id="tbCreditos"></tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>www
+    </div>
+
+    <div class="modal fade" id="calificacionModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Califique el credito</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="modalBody">
+                    <div class="row" id="divEstado1">
+                        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <label>¿Realizó el pago por los insumos?</label>
+                            <div class="radio">
+                                <label><input type="radio" id="estado1" name="estado1" value="Pago">Si</label>
+                            </div>
+                            <div class="radio">
+                                <label><input type="radio" id="estado1" name="estado1" value="No pago" checked>No</label>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row" id="divEstado2">
+                        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <label>¿Se realizó un convenio?</label>
+                            <div class="radio">
+                                <label><input type="radio" id="estado2" name="estado2" value="Convenio">Si</label>
+                            </div>
+                            <div class="radio">
+                                <label><input type="radio" id="estado2" name="estado2" value="No" checked>No</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" id="divEstado3">
+                        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <label>¿Finalizó de pagar el convenio?</label>
+                            <div class="radio">
+                                <label><input type="radio" id="estado3" name="estado3" value="Pago convenio">Si</label>
+                            </div>
+                            <div class="radio">
+                                <label><input type="radio" id="estado3" name="estado3" value="No pago convenio" checked>No</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row pull-right">
+                        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <button class="btn btn-secondary" id="btnVolver">Volver</button>
+                            <button class="btn btn-primary" id="btnGuardarE">Guardar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
 {% block scripts %}
     <script>
+        var idc;
+        var idr;
+        var estado;
+        $("#btnGuardarE").click(function () {
+            $.ajax({
+                type: "POST",
+                url: "{{ 'credit/gestado'|url }}",
+                dataType: 'json',
+                data: {
+                    id: idc,
+                    estado1: $("input[name=estado1]:checked").val(),
+                    estado2: $("input[name=estado2]:checked").val(),
+                    estado3: $("input[name=estado3]:checked").val(),
+                    estado: estado
+                },
+                success: function(json) {
+                    if (json.response === true){
+                        toastr.success("Guardado con exito.");
+                        $.ajax({
+                            type: "POST",
+                            url: "{{ 'credit/obtenerc'|url }}",
+                            dataType: 'json',
+                            data: {
+                                id: idr
+                            },
+                            success: function(json) {
+                                var html;
+                                    for (i=0; i < json.length; i++){
+                                        html += '<tr>'+
+                                            '<td>'+json[i].created_at+'</td>';
+                                        if (json[i].monto == ''){
+                                            html += '<td>No especificado</td>';
+                                        } else {
+                                            html += '<td>'+json[i].monto+'</td>';
+                                        }
+                                        if (json[i].plazo == ''){
+                                            html += '<td>No especificado</td>';
+                                        } else {
+                                            html += '<td>'+json[i].plazo+'</td>';
+                                        }
+                                        if (json[i].estado3 != null){
+                                            html += '<td><button class="btn btn-secondary" id="btnEstado" data-estado="4" data-id="'+json[i].id_rel+'">'+json[i].estado3+'</button></td>';
+                                        } else if(json[i].estado2 != null){
+                                            html += '<td><button class="btn btn-info" id="btnEstado" data-estado="3" data-id="'+json[i].id_rel+'">'+json[i].estado2+'</button></td>';
+                                        } else if (json[i].estado1 != null) {
+                                            html += '<td><button class="btn btn-primary" id="btnEstado" data-estado="2" data-id="'+json[i].id_rel+'">'+json[i].estado1+'</button></td>';
+                                        } else{
+                                            html += '<td><button class="btn btn-default" id="btnEstado" data-estado="1" data-id="'+json[i].id_rel+'">Sin calificar</button></td>';
+                                        }
+                                    }
+                                    $('#tbCreditos').html(html);
+                                $('#calificacionModal').modal('toggle');
+                                $("#clienteModal").modal('toggle');
+                            }
+                        });
+                    } else {
+                        toastr.error("Error al guardar");
+                    }
+                }
+            });
+        });
+        $("#btnVolver").click(function () {
+            $('#calificacionModal').modal('toggle');
+            $("#clienteModal").modal('toggle');
+        });
+        $(document).on('click','#btnEstado', function () {
+            idc = $(this).data('id');
+            if ($(this).data('estado') == 1){
+                $("#divEstado1").show();
+                $("#divEstado2").hide();
+                $("#divEstado3").hide();
+                $("#clienteModal").modal('toggle');
+                $('#calificacionModal').modal('toggle');
+                estado = 1;
+            } else if ($(this).data('estado') == 2){
+                $("#divEstado2").show();
+                $("#divEstado3").hide();
+                $("#divEstado1").hide();
+                $("#clienteModal").modal('toggle');
+                $('#calificacionModal').modal('toggle');
+                estado = 2;
+            } else if ($(this).data('estado') == 3){
+                $("#divEstado2").hide();
+                $("#divEstado3").show();
+                $("#divEstado1").hide();
+                $("#clienteModal").modal('toggle');
+                $('#calificacionModal').modal('toggle');
+                estado = 3;
+            } else {
+                toastr.warning("Este credito ya esta terminado.");
+            }
+        });
         $(document).on('click','#btnDetalle', function () {
             $("#clienteModal").modal('toggle');
             $("#spnFecha").html($(this).data('fecha'));
-            /*$.ajax({
+            idr =$(this).data('id');
+            $.ajax({
                 type: "POST",
-                url: "{{ 'credit/buscarcli'|url }}",
+                url: "{{ 'credit/obtenerc'|url }}",
                 dataType: 'json',
                 data: {
                     id: $(this).data('id')
                 },
                 success: function(json) {
-                    console.log(json);
+                    var html;
                     if (json.length === 0){
+                        html += '<tr>'+
+                            '<td colspan="4">Sin creditos registrados</td>'+
+                            '</tr>';
                     } else {
+                        for (i=0; i < json.length; i++){
+                            html += '<tr>'+
+                                    '<td>'+json[i].created_at+'</td>';
+                            if (json[i].monto == ''){
+                               html += '<td>No especificado</td>';
+                            } else {
+                                html += '<td>'+json[i].monto+'</td>';
+                            }
+                            if (json[i].plazo == ''){
+                                html += '<td>No especificado</td>';
+                            } else {
+                                html += '<td>'+json[i].plazo+'</td>';
+                            }
+                            if (json[i].estado3 != null){
+                                html += '<td><button class="btn btn-secondary" id="btnEstado" data-estado="4" data-id="'+json[i].id_rel+'">'+json[i].estado3+'</button></td>';
+                            } else if(json[i].estado2 != null){
+                                html += '<td><button class="btn btn-info" id="btnEstado" data-estado="3" data-id="'+json[i].id_rel+'">'+json[i].estado2+'</button></td>';
+                            } else if (json[i].estado1 != null) {
+                                html += '<td><button class="btn btn-primary" id="btnEstado" data-estado="2" data-id="'+json[i].id_rel+'">'+json[i].estado1+'</button></td>';
+                            } else{
+                                html += '<td><button class="btn btn-default" id="btnEstado" data-estado="1" data-id="'+json[i].id_rel+'">Sin calificar</button></td>';
+                            }
+                        }
+                        $('#tbCreditos').html(html);
                     }
                 }
-            });*/
+            });
         });
         $("#btnSearch").click(function (e) {
             e.preventDefault();
@@ -116,7 +304,7 @@
                     var html;
                     if (json.length === 0){
 
-                        html = '<table class="table table-hover">'+
+                        html = '<table class="table table-hover table-bordered">'+
                             '<thead>' +
                             '<tr>'+
                             '<th>Nombre</th>'+
@@ -128,14 +316,14 @@
                             '</thead>' +
                             '<tbody>'+
                             '<tr>'+
-                            '<td colspan="4">'+
+                            '<td colspan="5">'+
                             '<h5>No se encontraron resultados</h5>'+
                             '</td>'+
                             '<tr>'+
                             '</tbody>';
                         $("#tbClientes").html(html);
                     } else {
-                        html = '<table class="table table-hover">'+
+                        html = '<table class="table table-hover table-bordered">'+
                             '<thead>' +
                             '<tr>'+
                             '<th>Nombre</th>'+

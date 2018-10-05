@@ -78,6 +78,7 @@ class CreditController extends Controller
         $model->celular = $_POST['celular'];
         $model->persona = $_POST['persona'];
         $model->email = $_POST['email'];
+
         $rh = $this->clienteRepo->guardar($model);
 
         $model2 = new Bitacora();
@@ -122,6 +123,27 @@ class CreditController extends Controller
 
     }
 
+    public  function postGestado () {
+        $model = new Credit();
+
+        $model->id_rel = $_POST['id'];
+        if ($_POST['estado'] == 1){
+            $model->estado1 = $_POST['estado1'];
+        }
+        if ($_POST['estado'] == 2){
+            $model->estado2 = $_POST['estado2'];
+        }
+        if ($_POST['estado'] == 3){
+            $model->estado3 = $_POST['estado3'];
+        }
+
+        $rh = $this->creditRepo->actualizarEstado($model);
+
+        print_r(
+            json_encode($rh)
+        );
+    }
+
     public function postBuscarcredit() {
         print_r(
             json_encode($this->creditRepo->obtener($_POST['id']))
@@ -142,11 +164,18 @@ class CreditController extends Controller
     }
 
     public function postBuscarc(){
-        $rh = new  ResponseHelper();
         $busqueda = $_POST['busqueda'];
 
         print_r(
             json_encode($this->clienteRepo->buscarRfc($busqueda))
+        );
+    }
+
+    public function postObtenerc(){
+        $Usuario = Auth::getCurrentUser();
+        $id_cli = $_POST['id'];
+        print_r(
+            json_encode($this->creditRepo->listar($id_cli,$Usuario->id_emp))
         );
     }
     public function postUsuario(){

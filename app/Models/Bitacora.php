@@ -9,9 +9,10 @@
 namespace App\Models;
 
 
-use Core\Controller;
 
-class Bitacora extends Controller
+use Illuminate\Database\Eloquent\Model;
+
+class Bitacora extends Model
 {
     protected $table = "bitacora";
 }
