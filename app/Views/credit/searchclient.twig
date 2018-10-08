@@ -34,7 +34,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 text-center" id="tbClientes">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 text-center">
                         <table class="table table-hover">
                             <thead>
                             <tr>
@@ -42,9 +42,10 @@
                                 <th>RFC</th>
                                 <th>Telefono</th>
                                 <th>Celular</th>
+                                <th>Acción</th>
                             </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="tbClientes">
                                 <tr>
                                     <td colspan="4"><h5>Favor de ingresar tu busqueda</h5></td>
                                 </tr>
@@ -83,50 +84,32 @@
                     busqueda: $("#txtbusqueda").val()
                 },
                 success: function(json) {
-                    var html;
+                    var html = '';
                     if (json.length === 0){
-
-                         html = '<table class="table table-hover">'+
-                            '<thead>' +
-                            '<tr>'+
-                            '<th>Nombre</th>'+
-                            '<th>RFC</th>' +
-                            '<th>Telefono</th>' +
-                            '<th>Celular</th>' +
-                            '</tr>'+
-                        '</thead>' +
-                        '<tbody>'+
-                                '<tr>'+
+                         html = '<tr>'+
                                 '<td colspan="4">'+
                                 '<h5>No se encontraron resultados</h5>'+
                                 '</td>'+
-                                '<tr>'+
-                        '</tbody>';
+                                '<tr>';
                         $("#tbClientes").html(html);
                      } else {
-                         html = '<table class="table table-hover">'+
-                            '<thead>' +
-                                '<tr>'+
-                            '<th>Nombre</th>'+
-                            '<th>RFC</th>' +
-                            '<th>Telefono</th>' +
-                            '<th>Celular</th>' +
-                                '</tr>'+
-                            '</thead>' +
-                            '<tbody>';
                         for (i=0; i < json.length; i++){
                             html += '<tr>'+
                                     '<td>'+json[i].nombre+'</td>'+
                                     '<td>'+json[i].rfc+'</td>'+
                                     '<td>'+json[i].telefono+'</td>'+
                                     '<td>'+json[i].celular+'</td>'+
+                                    '<td><a href="{{ 'credit/clientedet'|url }}/'+json[i].id_cliente+'" class="btn btn-primary">Detalles</a></td>'+
                                     '</tr>';
                         }
-                        html += '</tbody></table>';
                         $("#tbClientes").html(html);
                     }
                 }
             });
         });
+
+        /*$(document).on('click','#btnDetalles',function () {
+            $.redirect('{{ 'credit/clientedet'|url }}', {id: $(this).data('id')});
+        });*/
     </script>
 {% endblock %}

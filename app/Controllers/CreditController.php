@@ -183,4 +183,12 @@ class CreditController extends Controller
             json_encode(Auth::getCurrentUser())
         );
     }
+
+    public function getClientedet($id){
+        return $this->render('credit/clientedet.twig', [
+            'title' => 'Detalle del cliente',
+            'datos' => $this->creditRepo->listarsinemp($id),
+            'cliente' => $this->clienteRepo->obtener($id)
+        ]);
+    }
 }

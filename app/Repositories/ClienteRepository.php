@@ -79,4 +79,16 @@ class ClienteRepository
         }
         return $lista;
     }
+
+    public function obtener($id) : Collection {
+        $cliente = [];
+
+        try {
+            $cliente = $this->cliente->where('id_cliente','=',$id)->get();
+        } catch (\Exception $e) {
+            Log::error(ClienteRepository::class, $e->getMessage());
+        }
+
+        return $cliente;
+    }
 }
