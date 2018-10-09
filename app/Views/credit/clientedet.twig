@@ -1,0 +1,71 @@
+{% extends "partials/layout.twig" %}
+{% block style %}
+    <style>
+
+        @font-face {
+            font-family: 'CenturyG';
+            src: url('{{ 'fonts' |public }}');
+        }
+
+        html, body, .container {
+            color: #333333;
+            font-family: CenturyG, sans-serif;
+            font-weight: 100;
+            height: 90%;
+        }
+
+
+        .divRenglon {
+            border: 1px solid #EEEEEE;
+            border-radius: 5px;
+            display: inline-block;
+            margin-bottom: 2px;
+            padding: 2px;
+            padding-right: 5px !important;
+            padding-left: 5px !important;
+        }
+
+        span {
+            color: #33b5e5;
+        }
+    </style>
+{% endblock %}
+{% block content %}
+    <div class="page-header">
+        <div class="pull-left">
+            <img src="{{ 'images/core-img/logo.png'|public }}" style="width: 200px;">
+        </div>
+
+        <div class="pull-right">
+
+            <h5>FOLIO <label>{{ cliente[0].id_cliente }} </label><h5>{{ cliente[0].nombre|upper }}</h5>
+            </h5><h5>{{ cliente[0].rfc }}</h5><h5>{{ cliente[0].email }}</h5><h5>{{ cliente[0].celular }}</h5><h5>{{ cliente[0].telefono }}</h5>{{ cliente[0].created_at }}
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    {% for credit in datos %}
+        <div class="row">
+                <div class="col-md-2 divRenglon">Monto:<span> {{ credit.monto |number_format(2,'.',',') }} </span></div>
+            {% if credit.plazo != '' %}
+                <div class="col-md-2 divRenglon">Plazo:<span> {{ credit.plazo }} días.</span></div>
+            {% else %}
+                <div class="col-md-2 divRenglon">Plazo:<span> No especificado.</span></div>
+            {% endif %}
+            {% if credit.activo == 1 %}
+                <div class="col-md-2 divRenglon">Credito Activo:<span> Si.</span></div>
+            {% else %}
+                <div class="col-md-2 divRenglon">Credito Activo:<span> No.</span></div>
+            {% endif %}
+            {% if credit.estado3 is not null %}
+                <div class="col-md-2 divRenglon">Credito Activo:<span>{{ credit.estado3 }}</span></div>
+            {% elseif credit.estado2 is not null %}
+                <div class="col-md-2 divRenglon">Credito Activo:<span>{{ credit.estado2 }}</span></div>
+            {% elseif credit.estado1 is not null %}
+                <div class="col-md-2 divRenglon">Credito Activo:<span>{{ credit.estado1 }}</span></div>
+            {% else %}
+                <div class="col-md-2 divRenglon">Credito Activo:<span>Sin calificar.</span></div>
+            {% endif %}
+                <div class="col-md-2 divRenglon">Fecha de creación:<span> {{ credit.created_at }} </span></div>
+        </div>
+    {% endfor %}
+{% endblock %}

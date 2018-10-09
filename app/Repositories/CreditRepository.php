@@ -88,4 +88,14 @@ class CreditRepository
         }
         return $creditos;
     }
+
+    public function listarsinemp($id_cli): Collection{
+        $creditos = [];
+        try{
+            $creditos = $this->credit->select('monto','activo','plazo','estado1','estado2','estado3','created_at')->where('id_cli','=',$id_cli)->get();
+        }catch (\Exception $e){
+            Log::error(UsuarioRepository::class, $e->getMessage());
+        }
+        return $creditos;
+    }
 }
