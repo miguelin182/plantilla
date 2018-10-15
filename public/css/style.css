@@ -92,8 +92,6 @@ a:focus {
     text-decoration: none;
     outline: 0 solid transparent;
     color: #191919;
-    font-weight: 500;
-    font-size: 14px;
     font-family: "Poppins", sans-serif; }
 
 ul,
@@ -175,7 +173,7 @@ img {
 /* :: 3.3.0 Section Padding */
 .section-padding-100 {
     padding-top: 10px;
-    padding-bottom: 10; }
+    padding-bottom: 10px; }
 
 .section-padding-100-0 {
     padding-top: 100px;
@@ -646,7 +644,7 @@ img {
         -ms-flex: 0 0 100%;
         flex: 0 0 100%;
         min-width: 100%;
-        width: 100%;s
+        width: 100%;
     } }
 .featured-post-area .carousel-inner .carousel-item {
     position: relative;

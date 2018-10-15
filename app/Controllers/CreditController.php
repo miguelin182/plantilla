@@ -9,16 +9,15 @@
 namespace App\Controllers;
 
 
-use App\Helpers\ResponseHelper;
 use App\Models\Bitacora;
 use App\Models\Cliente;
 use App\Models\Credit;
 use App\Repositories\BitacoraRepository;
 use App\Repositories\ClienteRepository;
 use App\Repositories\CreditRepository;
-use App\Validations\ClientValidation;
 use Core\Auth;
 use Core\Controller;
+use Illuminate\Support\Facades\Redirect;
 
 class CreditController extends Controller
 {
@@ -190,5 +189,25 @@ class CreditController extends Controller
             'datos' => $this->creditRepo->listarsinemp($id),
             'cliente' => $this->clienteRepo->obtener($id)
         ]);
+    }
+
+    public function getcontview() {
+        return $this->render('credit/contract.twig', [
+            'title' => 'Detalle del cliente'
+        ]);
+    }
+
+    public function getDowncont (){
+        $finfo = finfo_open(FILEINFO_MIME);
+        $content_type = finfo_file($finfo,_BASE_PATH_. "/download/Doc1.pdf");
+        finfo_close($finfo);
+        $file_name = basename(_BASE_PATH_. "/download/Doc1.pdf").PHP_EOL;
+        $size = filesize(_BASE_PATH_. "/download/Doc1.pdf");
+        header("Content-Type: $content_type");
+        header("Content-Disposition: attachment; filename=$file_name");
+        header("Content-Transfer-Encoding: binary");
+        header("Content-Lenght: $size");
+        readfile(_BASE_PATH_. "/download/Doc1.pdf");
+        return Redirect::back();
     }
 }
