@@ -292,7 +292,7 @@ img {
     border-bottom: 1px solid #f2f4f8;
     padding: 8px 12px; }
 .classynav ul li .dropdown li a {
-  border-bottom: 1px solid rgba(242, 244, 248, 0.7); }
+  border-bottom: 1px #404040; }
 .classynav ul li .dropdown li:last-child a {
   border-bottom: none; }
 .classynav ul li .dropdown li .dropdown li a {
@@ -520,7 +520,7 @@ img {
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   border-right: none; }
 .dark .classynav ul li.megamenu-item > a:after {
-  color: #ffffff; }
+  color: #404040; }
 .dark .classynav ul li .dropdown li a {
   border-bottom: 1px solid rgba(242, 244, 248, 0.1); }
 .dark .classynav ul li .dropdown li:last-child a {
